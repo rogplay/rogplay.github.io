@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Addons for Rogplay By Madstream</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Mobile menu styles */
+    .mobile-menu {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    .mobile-menu.active {
+      transform: translateX(0);
+    }
+
+    /* Video container for responsive iframe */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      overflow: hidden;
+    }
+    
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 0.5rem;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-violet-950">
+  <!-- Navbar -->
+  <header class="container mx-auto px-4 py-4">
+    <nav class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="relative h-8 w-8 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full">
+          <div class="absolute -top-1 -right-1 h-3 w-3 bg-amber-400 rounded-full"></div>
+        </div>
+        <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+          MADSTREAM
+        </span>
+      </div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center gap-6">
+        <a href="#home" class="text-white hover:text-cyan-400 transition-colors">Home</a>
+        <a href="#api" class="text-white hover:text-cyan-400 transition-colors">API</a>
+        <a href="#player" class="text-white hover:text-cyan-400 transition-colors">Player</a>
+        <a href="#video" class="text-white hover:text-cyan-400 transition-colors">Tutorials</a>
+        <a href="#pricing" class="text-white hover:text-cyan-400 transition-colors">Pricing</a>
+        <a href="#cta" class="text-white hover:text-cyan-400 transition-colors">How to Use</a>
+        <a href="https://telegram.me/rogplayaddons" class="px-4 py-2 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white">
+          Join Telegram
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 h-full w-64 bg-indigo-950 z-50 shadow-lg p-4 md:hidden">
+      <div class="flex justify-between items-center mb-6">
+        <div class="flex items-center gap-2">
+          <div class="relative h-8 w-8 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full">
+            <div class="absolute -top-1 -right-1 h-3 w-3 bg-amber-400 rounded-full"></div>
+          </div>
+          <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+            MADSTREAM
+          </span>
+        </div>
+        <button id="close-menu" class="text-white focus:outline-none">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+      <div class="flex flex-col gap-4">
+        <a href="#home" class="text-white hover:text-cyan-400 transition-colors py-2 border-b border-white/10">Home</a>
+        <a href="#api" class="text-white hover:text-cyan-400 transition-colors py-2 border-b border-white/10">API</a>
+        <a href="#player" class="text-white hover:text-cyan-400 transition-colors py-2 border-b border-white/10">Player</a>
+        <a href="#video" class="text-white hover:text-cyan-400 transition-colors py-2 border-b border-white/10">Tutorials</a>
+        <a href="#pricing" class="text-white hover:text-cyan-400 transition-colors py-2 border-b border-white/10">Pricing</a>
+        <a href="#cta" class="text-white hover:text-cyan-400 transition-colors py-2 border-b border-white/10">How to Use</a>
+        <a href="https://telegram.me/rogplayaddons" class="mt-4 px-4 py-2 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white text-center">
+          Join Telegram
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="container mx-auto px-4 py-16 md:py-10 text-center">
+    <div class="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm text-white/90 mb-6">
+      <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i>
+      <span>Providing Best Streaming Addons</span>
+    </div>
+    <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 max-w-4xl mx-auto leading-tight">
+      All New Stream, Channels, Cinema Addons
+    </h1>
+    <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-10">
+      for Rogplay in a single place
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="https://telegram.me/rogplayaddons" class="px-6 py-3 text-lg rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white">
+        JOIN TELEGRAM
+      </a>
+      <a href="https://rogplay.live" class="px-6 py-3 text-lg rounded-md text-white border border-white/20 hover:bg-white/10">
+       Download Rogplay
+      </a>
+    </div>
+  </section>
+
+  <!-- API Demo Section -->
+  <section id="api" class="container mx-auto px-4 py-8">
+    <div class="max-w-5xl mx-auto bg-black/20 backdrop-blur-sm rounded-xl p-4 md:p-8 border border-white/10 shadow-xl">
+      <div class="w-full">
+        <div class="bg-black/30 mb-4 inline-flex rounded-md">
+          <button class="tab-button px-4 py-2 rounded-md flex items-center gap-2 text-white bg-cyan-500/20" data-tab="movies">
+            <i data-lucide="tv" class="w-4 h-4"></i> Live TV
+          </button>
+          <button class="tab-button px-4 py-2 rounded-md flex items-center gap-2 text-white" data-tab="code">
+            <i data-lucide="film" class="w-4 h-4"></i> Cinema
+          </button>
+        </div>
+        
+        <div id="movies-tab" class="tab-content active text-white/90 font-mono text-sm relative">
+          <button class="copy-btn absolute top-2 right-2 px-2 py-1 text-xs bg-gray-700 text-white rounded">Copy</button>
+          <pre class="p-4 bg-black/40 rounded-lg overflow-x-auto">https://api.rogplay.site/addons.json</pre>
+        </div>
+        
+        <div id="code-tab" class="tab-content text-white/90 font-mono text-sm relative">
+          <button class="copy-btn absolute top-2 right-2 px-2 py-1 text-xs bg-gray-700 text-white rounded">Copy</button>
+          <pre class="p-4 bg-black/40 rounded-lg overflow-x-auto">https://api.rogplay.site/cinema/cinema.json</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Add this section after the API Demo section -->
+<section id="player" class="container mx-auto px-4 py-16">
+  <div class="max-w-5xl mx-auto bg-black/20 backdrop-blur-sm rounded-xl p-4 md:p-8 border border-white/10 shadow-xl">
+    <h2 class="text-3xl font-bold text-white mb-6 text-center">Embed Video Player</h2>
+    <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto text-center">
+      Test your streaming links or watch content directly in our player
+    </p>
+    
+    <div class="mb-6">
+      <div class="flex flex-col sm:flex-row gap-4">
+        <input 
+          type="text" 
+          id="video-url" 
+          placeholder="Enter video URL (HLS, MP4, etc.)" 
+          class="flex-1 px-4 py-3 rounded-md bg-black/30 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-cyan-500"
+        >
+        <button 
+          id="play-btn" 
+          class="px-6 py-3 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-medium"
+        >
+          Play Video
+        </button>
+      </div>
+    </div>
+    
+    <div id="video-container" class="aspect-video bg-black/50 rounded-xl overflow-hidden flex items-center justify-center">
+      <div id="player-placeholder" class="text-center p-8">
+        <i data-lucide="play-circle" class="w-16 h-16 text-white/30 mx-auto mb-4"></i>
+        <p class="text-white/50 text-lg">Enter a video URL and click Play</p>
+      </div>
+      <video id="video-player" class="w-full h-full hidden" controls></video>
+    </div>
+    
+    <div class="mt-6 text-center">
+      <p class="text-white/70 text-sm">
+        Supports various formats including HLS (.m3u8), MP4, WebM, and more
+      </p>
+    </div>
+  </div>
+</section>
+
+  <!-- Video Tutorial Section -->
+  <section id="video" class="container mx-auto px-4 py-16">
+    <div class="max-w-5xl mx-auto bg-black/20 backdrop-blur-sm rounded-xl p-4 md:p-8 border border-white/10 shadow-xl">
+      <h2 class="text-3xl font-bold text-white mb-6 text-center">Video Tutorials</h2>
+      <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto text-center">
+        Watch our step-by-step guides on how to use Rogplay addons effectively
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-black/30 rounded-xl p-4 border border-white/10">
+          <h3 class="text-xl font-semibold text-white mb-3">How to Install Addons</h3>
+          <div class="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+              title="How to Install Rogplay Addons" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+        
+        <div class="bg-black/30 rounded-xl p-4 border border-white/10">
+          <h3 class="text-xl font-semibold text-white mb-3">Using Cinema Addons</h3>
+          <div class="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+              title="Using Cinema Addons in Rogplay" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+<!-- Add the Pricing section before the CTA section -->
+<section id="pricing" class="container mx-auto px-4 py-16">
+  <div class="text-center mb-12">
+    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Choose Your Plan</h2>
+    <p class="text-white/80 text-lg max-w-2xl mx-auto">
+      Select the perfect plan for your streaming needs with our flexible pricing options
+    </p>
+  </div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+    <!-- Basic Plan -->
+    <div class="bg-black/20 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-cyan-500/50 transition-all duration-300 flex flex-col">
+      <div class="mb-6">
+        <h3 class="text-xl font-bold text-white mb-2">Basic</h3>
+        <div class="flex items-end gap-1 mb-4">
+          <span class="text-4xl font-bold text-white">$9</span>
+          <span class="text-white/70 mb-1">/month</span>
+        </div>
+        <p class="text-white/70">Perfect for casual viewers and beginners</p>
+      </div>
+      
+      <ul class="space-y-3 mb-8 flex-1">
+        <li class="flex items-start gap-2">
+          <i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5"></i>
+          <span class="text-white/80">Access to 50+ Live TV channels</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5"></i>
+          <span class="text-white/80">Basic Cinema addon</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5"></i>
+          <span class="text-white/80">720p streaming quality</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5"></i>
+          <span class="text-white/80">1 device at a time</span>
+        </li>
+      </ul>
+      
+      <a href="#" class="w-full py-3 rounded-md bg-white/10 hover:bg-white/20 text-white font-medium text-center transition-colors">
+        Get Started
+      </a>
+    </div>
+    
+    <!-- Pro Plan (Popular) -->
+    <div class="bg-gradient-to-b from-black/30 to-black/20 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/30 hover:border-cyan-500/70 transition-all duration-300 shadow-lg shadow-cyan-500/10 flex flex-col relative md:scale-105 z-10">
+      <div class="absolute top-0 right-0 left-0 flex justify-center">
+        <span class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-xs font-medium px-3 py-1 rounded-b-md">
+          MOST POPULAR
+        </span>
+      </div>
+      
+      <div class="mb-6 mt-4">
+        <h3 class="text-xl font-bold text-white mb-2">Pro</h3>
+        <div class="flex items-end gap-1 mb-4">
+          <span class="text-4xl font-bold text-white">$19</span>
+          <span class="text-white/70 mb-1">/month</span>
+        </div>
+        <p class="text-white/70">Ideal for regular streamers and families</p>
+      </div>
+      
+      <ul class="space-y-3 mb-8 flex-1">
+        <li class="flex items-start gap-2">
+          <i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5"></i>
+          <span class="text-white/80">Access to 120+ Live TV channels</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5"></i>
+          <span class="text-white/80">Premium Cinema addon</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5"></i>
+          <span class="text-white/80">1080p streaming quality</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5"></i>
+          <span class="text-white/80">3 devices at a time</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5"></i>
+          <span class="text-white/80">Cloud DVR (50 hours)</span>
+        </li>
+      </ul>
+      
+      <a href="#" class="w-full py-3 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-medium text-center">
+        Get Started
+      </a>
+    </div>
+    
+    <!-- Premium Plan -->
+    <div class="bg-black/20 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-cyan-500/50 transition-all duration-300 flex flex-col">
+      <div class="mb-6">
+        <h3 class="text-xl font-bold text-white mb-2">Premium</h3>
+        <div class="flex items-end gap-1 mb-4">
+          <span class="text-4xl font-bold text-white">$29</span>
+          <span class="text-white/70 mb-1">/month</span>
+        </div>
+        <p class="text-white/70">Ultimate experience for streaming enthusiasts</p>
+      </div>
+      
+      <ul class="space-y-3 mb-8 flex-1">
+        <li class="flex items-start gap-2">
+          <i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5"></i>
+          <span class="text-white/80">Access to 200+ Live TV channels</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5"></i>
+          <span class="text-white/80">All Cinema addons included</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5"></i>
+          <span class="text-white/80">4K streaming quality</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5"></i>
+          <span class="text-white/80">5 devices at a time</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5"></i>
+          <span class="text-white/80">Cloud DVR (100 hours)</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5"></i>
+          <span class="text-white/80">Priority customer support</span>
+        </li>
+      </ul>
+      
+      <a href="#" class="w-full py-3 rounded-md bg-white/10 hover:bg-white/20 text-white font-medium text-center transition-colors">
+        Get Started
+      </a>
+    </div>
+  </div>
+</section>
+  
+  <!-- CTA Section -->
+  <section id="cta" class="container mx-auto px-4 py-16">
+    <div class="max-w-4xl mx-auto bg-gradient-to-r from-cyan-900/40 to-blue-900/40 rounded-2xl p-8 md:p-12 text-center backdrop-blur-sm border border-white/10">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+        How to Use Addons?
+      </h2>
+      <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+        Copy the Addons link given above and paste in the Addons page of Rogplay App!
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="https://api.rogplay.site/installation.html" class="px-6 py-3 text-lg rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white">
+          See tutorial
+        </a>
+        <a href="https://rogplay.live/api-docs" class="px-6 py-3 text-lg rounded-md text-white border border-white/20 hover:bg-white/10">
+          Api-Docs
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="container mx-auto px-4 py-8 border-t border-white/10">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="flex items-center gap-2 mb-4 md:mb-0">
+        <div class="relative h-6 w-6 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full">
+          <div class="absolute -top-1 -right-1 h-2 w-2 bg-amber-400 rounded-full"></div>
+        </div>
+        <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+          MADSTREAM
+        </span>
+      </div>
+      <div class="text-white/60 text-sm">
+        © 2023 Madstream. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+    
+    // Tab functionality
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('bg-cyan-500/20'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        button.classList.add('bg-cyan-500/20');
+        document.getElementById(`${button.getAttribute('data-tab')}-tab`).classList.add('active');
+      });
+    });
+    
+    // Copy button functionality
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.nextElementSibling.innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          btn.innerText = 'Copied!';
+          setTimeout(() => btn.innerText = 'Copy', 2000);
+        });
+      });
+    });
+
+    // Mobile menu functionality
+    const menuToggle = document.getElementById('menu-toggle');
+    const closeMenu = document.getElementById('close-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+    });
+
+    closeMenu.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+    });
+
+    // Close menu when clicking on a link
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && e.target !== menuToggle && !menuToggle.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+      }
+    });
+
+// Video player functionality
+const videoUrl = document.getElementById('video-url');
+const playBtn = document.getElementById('play-btn');
+const videoPlayer = document.getElementById('video-player');
+const playerPlaceholder = document.getElementById('player-placeholder');
+
+playBtn.addEventListener('click', () => {
+  const url = videoUrl.value.trim();
+  
+  if (url) {
+    videoPlayer.src = url;
+    videoPlayer.classList.remove('hidden');
+    playerPlaceholder.classList.add('hidden');
+    videoPlayer.play().catch(error => {
+      console.error('Error playing video:', error);
+      // Show error message if video fails to play
+      videoPlayer.classList.add('hidden');
+      playerPlaceholder.classList.remove('hidden');
+      playerPlaceholder.innerHTML = `
+        <i data-lucide="alert-triangle" class="w-16 h-16 text-red-500/70 mx-auto mb-4"></i>
+        <p class="text-white/70 text-lg">Unable to play this video. Please check the URL and try again.</p>
+      `;
+      lucide.createIcons(); // Refresh icons
+    });
+  }
+});
+
+// Reset player when URL is cleared
+videoUrl.addEventListener('input', () => {
+  if (videoUrl.value.trim() === '') {
+    videoPlayer.src = '';
+    videoPlayer.classList.add('hidden');
+    playerPlaceholder.classList.remove('hidden');
+    playerPlaceholder.innerHTML = `
+      <i data-lucide="play-circle" class="w-16 h-16 text-white/30 mx-auto mb-4"></i>
+      <p class="text-white/50 text-lg">Enter a video URL and click Play</p>
+    `;
+    lucide.createIcons(); // Refresh icons
+  }
+});
+  </script>
+</body>
+</html>

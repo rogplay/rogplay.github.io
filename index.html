@@ -235,24 +235,7 @@
     <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto text-center">
       Watch this video to get insight
     </p>
-    
-    <div class="mb-6">
-      <div class="flex flex-col sm:flex-row gap-4">
-        <input 
-          type="text" 
-          id="video-url" 
-          placeholder="Enter video URL (HLS, MP4, etc.)" 
-          class="flex-1 px-4 py-3 rounded-md bg-black/30 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-cyan-500"
-        >
-        <button 
-          id="play-btn" 
-          class="px-6 py-3 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-medium"
-        >
-          Play Video
-        </button>
-      </div>
-    </div>
-    
+        
     <div id="video-container" class="aspect-video bg-black/50 rounded-xl overflow-hidden flex items-center justify-center">
       <div id="player-placeholder" class="text-center p-8">
         <i data-lucide="play-circle" class="w-16 h-16 text-white/30 mx-auto mb-4"></i>
@@ -263,7 +246,7 @@
     
     <div class="mt-6 text-center">
       <p class="text-white/70 text-sm">
-        Supports various formats including HLS (.m3u8), MP4, WebM, and more
+        Bookmark <b>https://rogplay.github.io</b> to get latest addons.
       </p>
     </div>
   </div>
@@ -358,8 +341,7 @@ const playBtn = document.getElementById('play-btn');
 const videoPlayer = document.getElementById('video-player');
 const playerPlaceholder = document.getElementById('player-placeholder');
 
-playBtn.addEventListener('click', () => {
-  const url = videoUrl.value.trim();
+  const url = "https://raw.githubusercontent.com/rogplay/rogplay.github.io/refs/heads/main/howtoadd.mp4"
   
   if (url) {
     videoPlayer.src = url;
@@ -377,7 +359,6 @@ playBtn.addEventListener('click', () => {
       lucide.createIcons(); // Refresh icons
     });
   }
-});
 
 // Reset player when URL is cleared
 videoUrl.addEventListener('input', () => {

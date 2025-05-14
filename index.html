@@ -133,34 +133,100 @@
     </div>
   </section>
 
-  <!-- API Demo Section -->
-  <section id="api" class="container mx-auto px-4 py-8">
+<!-- API Demo Section -->
+<section id="api" class="container mx-auto px-4 py-8">
     <div class="max-w-5xl mx-auto bg-black/20 backdrop-blur-sm rounded-xl p-4 md:p-8 border border-white/10 shadow-xl">
-      <div class="w-full">
-        <div class="bg-black/30 mb-4 inline-flex rounded-md">
-          <button class="tab-button px-4 py-2 rounded-md flex items-center gap-2 text-white bg-cyan-500/20" data-tab="movies">
-            <i data-lucide="tv" class="w-4 h-4"></i> Live TV
-          </button>
-          <button class="tab-button px-4 py-2 rounded-md flex items-center gap-2 text-white" data-tab="code">
-            <i data-lucide="film" class="w-4 h-4"></i> Cinema
-          </button>
-          <button class="tab-button px-4 py-2 rounded-md flex items-center gap-2 text-white" data-tab="code">
-            <i data-lucide="film" class="w-4 h-4"></i> Movie
-          </button>          
+        <div class="w-full"></div>
+            <div id="tabs-container" class="bg-black/30 mb-4 inline-flex rounded-md"></div>
+            <div id="content-container"></div>
         </div>
-        
-        <div id="movies-tab" class="tab-content active text-white/90 font-mono text-sm relative">
-          <button class="copy-btn absolute top-2 right-2 px-2 py-1 text-xs bg-gray-700 text-white rounded">Copy</button>
-          <pre class="p-4 bg-black/40 rounded-lg overflow-x-auto">https://api.rogplay.site/addons.json</pre>
-        </div>
-        
-        <div id="code-tab" class="tab-content text-white/90 font-mono text-sm relative">
-          <button class="copy-btn absolute top-2 right-2 px-2 py-1 text-xs bg-gray-700 text-white rounded">Copy</button>
-          <pre class="p-4 bg-black/40 rounded-lg overflow-x-auto">https://api.rogplay.site/cinema/cinema.json</pre>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
+
+<script>
+    const apiUrl = 'https://raw.githubusercontent.com/kunwarxshashank/rogplay_addons/refs/heads/main/alladdons.json'; // Replace with your JSON URL
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const tabsContainer = document.getElementById('tabs-container');
+            const contentContainer = document.getElementById('content-container');
+
+            const groupedAddons = data.reduce((acc, addon) => {
+                if (!acc[addon.type]) {
+                    acc[addon.type] = [];
+                }
+                acc[addon.type].push(addon);
+                return acc;
+            }, {});
+
+            Object.keys(groupedAddons).forEach((type, typeIndex) => {
+                // Create tab button for each type
+                const tabButton = document.createElement('button');
+                tabButton.className = `tab-button px-4 py-2 rounded-md flex items-center gap-2 text-white ${typeIndex === 0 ? 'bg-cyan-500/20' : ''}`;
+                tabButton.setAttribute('data-tab', `tab-${type}`);
+                tabButton.innerHTML = `<i data-lucide="${type === 'cinema' ? 'film' : 'tv'}" class="w-4 h-4"></i> ${type.toUpperCase()}`;
+                tabsContainer.appendChild(tabButton);
+
+                // Create tab content for each type
+                const tabContent = document.createElement('div');
+                tabContent.id = `tab-${type}`;
+                tabContent.className = `tab-content text-white/90 font-mono text-sm relative ${typeIndex === 0 ? 'active' : ''}`;
+                tabContent.innerHTML = groupedAddons[type]
+                    .map(addon => `
+                        <div class="p-4 bg-black/40 rounded-lg mb-4">
+                            <div class="flex items-center gap-4 mb-2">
+                                <img src="${addon.logo}" alt="${addon.title}" class="w-12 h-12 rounded-md">
+                                <div>
+                                    <h3 class="text-lg font-bold">${addon.title}</h3>
+                                    <p class="text-white/70 text-sm">${addon.description}</p>
+                                </div>
+                            </div>
+                            <button 
+                                class="copy-btn px-4 py-2 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white"
+                                data-url="${addon.url}">
+                                Copy Addon URL
+                            </button>
+                        </div>
+                    `)
+                    .join('');
+                contentContainer.appendChild(tabContent);
+            });
+            // Add copy functionality for addon URLs
+            document.querySelectorAll('.copy-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const url = button.getAttribute('data-url');
+                    navigator.clipboard.writeText(url).then(() => {
+                        button.innerText = 'Copied!';
+                        setTimeout(() => button.innerText = 'Copy Addon URL', 2000);
+                    }).catch(err => console.error('Error copying URL:', err));
+                });
+            });
+            // Add tab functionality
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('bg-cyan-500/20'));
+                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                    button.classList.add('bg-cyan-500/20');
+                    document.getElementById(`${button.getAttribute('data-tab')}`).classList.add('active');
+                });
+            });
+
+            // Add copy functionality
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('copy-btn')) {
+                    const url = e.target.getAttribute('data-url');
+                    navigator.clipboard.writeText(url).then(() => {
+                        e.target.innerText = 'Copied!';
+                        setTimeout(() => e.target.innerText = 'Copy Addon URL', 2000);
+                    }).catch(err => console.error('Error copying URL:', err));
+                }
+            });
+
+            lucide.createIcons(); // Refresh icons
+        })
+        .catch(error => console.error('Error fetching addons:', error));
+</script>
 
 <!-- Add this section after the API Demo section -->
 <section id="player" class="container mx-auto px-4 py-16">
@@ -256,17 +322,7 @@
         document.getElementById(`${button.getAttribute('data-tab')}-tab`).classList.add('active');
       });
     });
-    
-    // Copy button functionality
-    document.querySelectorAll('.copy-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const code = btn.nextElementSibling.innerText;
-        navigator.clipboard.writeText(code).then(() => {
-          btn.innerText = 'Copied!';
-          setTimeout(() => btn.innerText = 'Copy', 2000);
-        });
-      });
-    });
+
 
     // Mobile menu functionality
     const menuToggle = document.getElementById('menu-toggle');

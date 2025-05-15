@@ -243,7 +243,7 @@
         <i data-lucide="play-circle" class="w-16 h-16 text-white/30 mx-auto mb-4"></i>
         <p class="text-white/50 text-lg">Enter a video URL and click Play</p>
       </div>
-      <video id="video-player" class="w-full h-full hidden" controls></video>
+      <video id="video-player" class="w-full h-full hidden" src="https://raw.githubusercontent.com/rogplay/rogplay.github.io/refs/heads/main/howtoadd.mp4" controls></video>
     </div>
     
     <div class="mt-6 text-center">
@@ -337,44 +337,7 @@
       }
     });
 
-// Video player functionality
-const videoUrl = document.getElementById('video-url');
-const playBtn = document.getElementById('play-btn');
-const videoPlayer = document.getElementById('video-player');
-const playerPlaceholder = document.getElementById('player-placeholder');
 
-  const url = "https://raw.githubusercontent.com/rogplay/rogplay.github.io/refs/heads/main/howtoadd.mp4"
-  
-  if (url) {
-    videoPlayer.src = url;
-    videoPlayer.classList.remove('hidden');
-    playerPlaceholder.classList.add('hidden');
-    videoPlayer.play().catch(error => {
-      console.error('Error playing video:', error);
-      // Show error message if video fails to play
-      videoPlayer.classList.add('hidden');
-      playerPlaceholder.classList.remove('hidden');
-      playerPlaceholder.innerHTML = `
-        <i data-lucide="alert-triangle" class="w-16 h-16 text-red-500/70 mx-auto mb-4"></i>
-        <p class="text-white/70 text-lg">Unable to play this video. Please check the URL and try again.</p>
-      `;
-      lucide.createIcons(); // Refresh icons
-    });
-  }
-
-// Reset player when URL is cleared
-videoUrl.addEventListener('input', () => {
-  if (videoUrl.value.trim() === '') {
-    videoPlayer.src = 'https://raw.githubusercontent.com/rogplay/rogplay.github.io/refs/heads/main/howtoadd.mp4';
-    videoPlayer.classList.add('hidden');
-    playerPlaceholder.classList.remove('hidden');
-    playerPlaceholder.innerHTML = `
-      <i data-lucide="play-circle" class="w-16 h-16 text-white/30 mx-auto mb-4"></i>
-      <p class="text-white/50 text-lg">Enter a video URL and click Play</p>
-    `;
-    lucide.createIcons(); // Refresh icons
-  }
-});
   </script>
 </body>
 </html>

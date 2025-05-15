@@ -365,7 +365,7 @@ const playerPlaceholder = document.getElementById('player-placeholder');
 // Reset player when URL is cleared
 videoUrl.addEventListener('input', () => {
   if (videoUrl.value.trim() === '') {
-    videoPlayer.src = '';
+    videoPlayer.src = 'https://raw.githubusercontent.com/rogplay/rogplay.github.io/refs/heads/main/howtoadd.mp4';
     videoPlayer.classList.add('hidden');
     playerPlaceholder.classList.remove('hidden');
     playerPlaceholder.innerHTML = `

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Rogplay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'hsl(280, 100%, 50%)',
+                        secondary: 'hsl(160, 100%, 50%)',
+                        background: 'hsl(230, 30%, 10%)',
+                        muted: 'hsl(240, 20%, 20%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .neon-glow { box-shadow: 0 0 10px rgba(168, 85, 247, 0.5), 0 0 20px rgba(168, 85, 247, 0.3), 0 0 30px rgba(168, 85, 247, 0.1); }
+        .neon-text { text-shadow: 0 0 5px rgba(168, 85, 247, 0.5), 0 0 10px rgba(168, 85, 247, 0.3), 0 0 15px rgba(168, 85, 247, 0.1); }
+        .neon-border { box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2), 0 0 0 4px rgba(168, 85, 247, 0.2); }
+        .cursor-glow {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(168, 85, 247, 0) 70%);
+        }
+    </style>
+</head>
+<body class="bg-background text-white">
+    <div id="cursor-glow" class="cursor-glow"></div>
+
+    <nav class="fixed w-full z-50 bg-background/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg"></div>
+                        <span class="text-xl font-bold">Rogplay</span>
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="/" class="text-gray-300 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/about" class="text-gray-300 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="/api-docs" class="text-gray-300 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">API Docs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl font-bold mb-8 neon-text">Privacy Policy</h1>
+            
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold mb-4">1. Introduction</h2>
+                <p class="mb-4">Welcome to Rogplay's Privacy Policy. Your privacy is critically important to us. This Privacy Policy document contains types of information that is collected and recorded by Rogplay and how we use it.</p>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold mb-4">2. Information We Collect</h2>
+                <p class="mb-4">We collect several different types of information for various purposes to provide and improve our Service to you:</p>
+                <ul class="list-disc pl-6 mb-4">
+                    <li>Personal Data: While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you.</li>
+                    <li>Usage Data: We may also collect information on how the Service is accessed and used.</li>
+                    <li>Tracking & Cookies Data: We use cookies and similar tracking technologies to track the activity on our Service and hold certain information.</li>
+                </ul>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold mb-4">3. How We Use Your Information</h2>
+                <p class="mb-4">Rogplay uses the collected data for various purposes:</p>
+                <ul class="list-disc pl-6 mb-4">
+                    <li>To provide and maintain our Service</li>
+                    <li>To notify you about changes to our Service</li>
+                    <li>To allow you to participate in interactive features of our Service when you choose to do so</li>
+                    <li>To provide customer support</li>
+                    <li>To gather analysis or valuable information so that we can improve our Service</li>
+                    <li>To monitor the usage of our Service</li>
+                    <li>To detect, prevent and address technical issues</li>
+                </ul>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold mb-4">4. Data Security</h2>
+                <p class="mb-4">The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.</p>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold mb-4">5. Changes to This Privacy Policy</h2>
+                <p class="mb-4">We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-semibold mb-4">6. Contact Us</h2>
+                <p class="mb-4">If you have any questions about this Privacy Policy, please contact us:</p>
+                <ul class="list-disc pl-6">
+                    <li>By email: kunwarxshashank@gmail.com</li>
+                    <li>By visiting this page on our website: https://rogplay.live/pages/contact.html</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-muted py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <p class="text-sm text-gray-400">&copy; 2025 Rogplay. All rights reserved.</p>
+                <nav class="flex space-x-4">
+                    <a href="/privacy-policy" class="text-sm text-gray-400 hover:text-white">Privacy Policy</a>
+                    <a href="/terms-of-service" class="text-sm text-gray-400 hover:text-white">Terms of Service</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const cursorGlow = document.getElementById('cursor-glow');
+        let isMoving = false;
+        let fadeOutTimeout;
+
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX - 100;
+            const y = e.clientY - 100;
+            
+            cursorGlow.style.left = `${x}px`;
+            cursorGlow.style.top = `${y}px`;
+            
+            if (!isMoving) {
+                isMoving = true;
+                cursorGlow.style.opacity = '1';
+            }
+            
+            clearTimeout(fadeOutTimeout);
+            fadeOutTimeout = setTimeout(() => {
+                cursorGlow.style.opacity = '0';
+                isMoving = false;
+            }, 300);
+        });
+
+        document.addEventListener('mouseleave', () => {
+            cursorGlow.style.opacity = '0';
+        });
+    </script>
+</body>
+</html>

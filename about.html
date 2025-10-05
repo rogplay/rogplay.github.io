@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Rogplay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'hsl(280, 100%, 50%)',
+                        secondary: 'hsl(160, 100%, 50%)',
+                        background: 'hsl(230, 30%, 10%)',
+                        muted: 'hsl(240, 20%, 20%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .neon-text { text-shadow: 0 0 5px rgba(168, 85, 247, 0.5), 0 0 10px rgba(168, 85, 247, 0.3), 0 0 15px rgba(168, 85, 247, 0.1); }
+    </style>
+</head>
+<body class="bg-background text-white">
+    <nav class="fixed w-full z-50 bg-background/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg"></div>
+                    <span class="text-xl font-bold">Rogplay</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- About Us Heading -->
+            <h1 class="text-4xl font-bold mb-8 neon-text">About Us</h1>
+            <p class="mb-6 text-gray-300">Rogplay is a powerful, multi-platform video player app designed to bring your entertainment experience to the next level. With support for IPTV, network streaming, and a range of add-on features, Rogplay allows you to enjoy your favorite content seamlessly, wherever you are.</p>
+            
+            <!-- Vision Section -->
+            <h2 class="text-3xl font-semibold mb-4 neon-text">Our Vision</h2>
+            <p class="mb-6 text-gray-300">We envision a world where entertainment is always at your fingertips. Rogplay combines the power of live streaming, video-on-demand, and customizations to create a unique and personalized experience for every user. Whether it's IPTV, network streaming, or custom addons, we provide the tools for users to discover, watch, and enjoy their content the way they want.</p>
+
+            <!-- Features Section -->
+            <h2 class="text-3xl font-semibold mb-4 neon-text">Features</h2>
+            <ul class="list-disc list-inside text-gray-300 mb-6">
+                <li>Support for IPTV and live streaming for real-time broadcasts.</li>
+                <li>Network streaming compatibility for seamless access to videos from different sources.</li>
+                <li>Addon feature allowing users to create or install add-ons for even more content options.</li>
+                <li>Cross-platform availability, so you can enjoy your videos on any device, anywhere.</li>
+                <li>User-friendly interface with customizable settings to fit your preferences.</li>
+            </ul>
+
+            <!-- Team Section -->
+            <h2 class="text-3xl font-semibold mb-4 neon-text">Our Team</h2>
+            <p class="mb-6 text-gray-300">Behind Rogplay is a passionate team of developers and entertainment enthusiasts who believe in the power of media. We work tirelessly to improve our app, constantly adding new features and enhancing the user experience to keep up with the latest trends in streaming and content consumption.</p>
+
+            <!-- Join Us Section -->
+            <h2 class="text-3xl font-semibold mb-4 neon-text">Join Us</h2>
+            <p class="mb-6 text-gray-300">We’re always looking for new ways to innovate and improve. Whether you’re a developer, content creator, or just someone who loves streaming, we welcome your feedback and ideas. Join us in making Rogplay the best place to enjoy all your favorite content.</p>
+        </div>
+    </main>
+
+    <footer class="bg-muted py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-sm text-gray-400">&copy; 2025 Rogplay. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

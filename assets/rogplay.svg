@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg version="1.1" id="Layer_1" xmlns:x="&amp;ns_extend;" xmlns:i="&amp;ns_ai;" xmlns:graph="&amp;ns_graphs;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 284.053 315" style="enable-background:new 0 0 284.053 315;" xml:space="preserve">
+      <style type="text/css">.st0{fill:#13EADA;}	.st1{fill:#E815DE;}	.st2{fill:#24BFFC;}</style>
+    <metadata>
+              <sfw>
+                      <slices/>
+            <sliceSourceBounds bottomLeftOrigin="true" height="315" width="284.053" x="0" y="0"/>
+                  </sfw>
+          </metadata>
+    <g id="color_index_2" fill="#13eada">
+              <path d="M262.271,118.646L67.296,6.078C37.387-11.191,0,10.395,0,44.931v225.138c0,34.536,37.387,56.122,67.296,38.854&#x9;&#x9;l194.975-112.569C290.857,179.511,291.284,135.728,262.271,118.646z"/>
+          </g>
+    <g id="color_index_1" fill="#e815de">
+              <path d="M87.47,157.5L0,106.999V208c15.838-7.033,33.092-15.722,51.133-26.494&#x9;&#x9;C64.493,173.529,76.596,165.418,87.47,157.5z"/>
+          </g>
+    <g id="color_index_0" fill="#24bffc">
+              <path d="M261.296,118.083l-52.777-30.47L0,208.001v60.941c0,35.037,37.929,56.936,68.272,39.417l193.023-111.442&#x9;&#x9;C291.639,179.398,291.639,135.601,261.296,118.083z"/>
+          </g>
+  </svg>

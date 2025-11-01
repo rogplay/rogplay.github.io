@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation - Rogplay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'hsl(280, 100%, 50%)',
+                        secondary: 'hsl(160, 100%, 50%)',
+                        background: 'hsl(230, 30%, 10%)',
+                        muted: 'hsl(240, 20%, 20%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .neon-glow {
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.5), 0 0 20px rgba(168, 85, 247, 0.3), 0 0 30px rgba(168, 85, 247, 0.1);
+        }
+
+        .neon-text {
+            text-shadow: 0 0 5px rgba(168, 85, 247, 0.5), 0 0 10px rgba(168, 85, 247, 0.3), 0 0 15px rgba(168, 85, 247, 0.1);
+        }
+
+        .neon-border {
+            box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2), 0 0 0 4px rgba(168, 85, 247, 0.2);
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(168, 85, 247, 0) 70%);
+        }
+
+        .method {
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 0.25rem;
+            font-weight: bold;
+        }
+
+        .method-get {
+            background-color: #61affe;
+            color: #fff;
+        }
+
+        .method-post {
+            background-color: #49cc90;
+            color: #fff;
+        }
+
+        .method-put {
+            background-color: #fca130;
+            color: #fff;
+        }
+
+        .method-delete {
+            background-color: #f93e3e;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-white">
+    <div id="cursor-glow" class="cursor-glow"></div>
+
+    <nav class="fixed w-full z-50 bg-background/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center space-x-2">
+                        <div class="w-8 h-8"><img src="https://raw.githubusercontent.com/rogplay/rogplay.github.io/refs/heads/main/assets/rogplay.svg" /></div>
+                        <span class="text-xl font-bold">Rogplay</span>
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="https://rogplay.live/"
+                            class="text-gray-300 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="https://rogplay.github.io/about.html"
+                            class="text-gray-300 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="https://rogplay.github.io/privacy-policy.html"
+                            class="text-gray-300 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">Privacy
+                            Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+                <div class="hidden lg:block lg:col-span-3">
+                    <nav class="sticky top-20 divide-y divide-gray-700" id="category-nav">
+                        <!-- Category navigation will be populated here -->
+                    </nav>
+                </div>
+                <main class="lg:col-span-9">
+                    <div class="px-4 sm:px-6 lg:px-8">
+                        <h1 class="text-4xl font-bold mb-8 neon-text">API Documentation</h1>
+
+                        <section id="introduction" class="mb-12">
+                            <h2 class="text-2xl font-semibold mb-4">Introduction</h2>
+                            <p class="mb-4">Welcome to the Rogplay API. This API allows you to create your own Fully
+                                edge working Addons, as well as cinema content and customize as you want.</p>
+                            <p class="mb-4">This App made with React Native which works on JavaScript environment,
+                                allowing things made easier</p>
+                        </section>
+
+
+
+                        <section id="addons" class="mb-12">
+                            <h2 class="text-2xl font-semibold mb-4">Addons</h2>
+                            <p> Addons in the RogPlay app enhance user experience by allowing seamless integration of
+                                various streams. With this feature, users can add and enjoy a wide range of streaming
+                                sources, customizing their entertainment as they prefer.
+                                Whether it's movies, live channels, or exclusive content, Addons provide flexibility and
+                                personalization, making RogPlay a versatile streaming platform.</p>
+                            <br>
+                            <div class="mb-8">
+                                <h3 class="text-xl font-semibold mb-2">Creating Addons</h3>
+                                <p class="mb-2"><span class="method method-get">GET</span>
+                                    https://pastebin.com/raw/xfwgakrL
+                                </p>
+                                <p class="mb-4">Sample of Supported Json Format</p>
+                                <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+<code>
+[
+    {
+      "version": "1.0",
+      "title": "Free IPTV",
+      "logo": "https://raw.githubusercontent.com/rogplay/public/refs/heads/main/assets/freeiptv.png",
+      "url": "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8",
+      "type": "livetv",
+      "description": "List of Free and Public IPTV Channels available worldwide"
+    },
+    {
+      "version": "1.0",
+      "title": "Free Cinema",
+      "logo": "https://raw.githubusercontent.com/rogplay/public/refs/heads/main/assets/tmdb.jpg",
+      "url": "https://nl1.api.radio-browser.info/m3u/stations",
+      "type": "cinema",
+      "description": "List of Free and Public Cinema"
+    }
+]
+</code>
+                                </pre>
+                            </div>
+
+                            <p class="mb-2">Currently 3 addons type cinema and livetv supported</p>
+                            <code>"type": "cinema"</code>
+                            <p class="mb-4"> is read only can be used fr works only on cinema screen</p>
+                            <code>"type": "livetv"</code>
+                            <p class="mb-4"> is used for displaying livetv or other streaming content on addons</p>
+                            <code>"type": "movie"</code>
+                            <p class="mb-4"> is used for displaying movie based content "True API"</p>
+
+                        </section>
+
+                        <section id="streaming" class="mb-12">
+                            <h2 class="text-2xl font-semibold mb-4">Streaming / LiveTV</h2>
+                            <p class="mb-2">Rogplay Support Native M3U and Json based structure for streaming contents
+                            </p>
+                            <div class="mb-8">
+                                <h3 class="text-xl font-semibold mb-2" style="color: #61affe;">M3u Format</h3>
+                                <p class="mb-4">Below Sample M3u Example </p>
+                                <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+<code>
+#EXTM3U
+#EXTINF:-1 tvg-id="1" tvg-logo="https://i.imgur.com/LMxTAzY.png" group-title="france",TF1 FHD
+https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8
+#EXTINF:-1 tvg-id="2" tvg-logo="https://i.imgur.com/TmsIL5C.png" group-title="france",France 2
+https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8
+</code>
+</pre>
+
+                            </div>
+
+
+
+                            <p class="mb-2"><span class="method method-post">HEADERS</span>
+                            </p>
+                            <p class="mb-2">You can pass headers in url by passing <code>? or  & or  |</code> in end of
+                                url</p>
+                            <p class="mb-2">Headers passed in url is case insensitive Origin, ORIGIN, orign treated same
+                            </p>
+                            <p class="mb-4">You can pass multiple headers by using <code> & </code></p>
+                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+<code>https://rogplay.live/index.m3u8?Referer=https://rogplay.live
+https://rogplay.live/index.m3u8|User-Agent=https://rogplay.live
+https://rogplay.live/index.m3u8?Referer=https://rogplay.live&Cookie=username=johndoe; expires=Thu, 18 Dec 2023</code>
+                                </pre>
+                            <br>
+                            <br>
+
+                            <p class="mb-2"><span class="method method-post">DRM Playback</span>
+                            </p>
+                            <p class="mb-2">Rogplay provides support for CLEARKEY, WIDEVINE, FLAIRPLAY, PLAYREADY drm
+                                scheme irrespective of your devices.</p>
+                            <br>
+                            <code>1. WIDEVINE</code>
+
+                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+<code>#EXTINF:-1, Demo channel
+#KODIPROP:inputstream.adaptive.license_key=https://cwip-shaka-proxy.appspot.com/no_auth
+#KODIPROP:inputstream.adaptive.license_type=WIDEVINE
+https://cdn.bitmovin.com/content/assets/art-of-motion_drm/m3u8s/11331.m3u8</code>
+                                </pre>
+                            <br>
+
+                            <code>2. CLEARKEY</code>
+
+                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+<code>#EXTINF:-1, Demo channel
+#KODIPROP:inputstream.adaptive.license_key=https://example.to/licenseurl
+#KODIPROP:inputstream.adaptive.license_type=CLEARKEY
+http://example.com/channel/02</code>
+                                </pre>
+                            <br>
+                            <p class="mb-4">Rogplay Supports differnt type of clearkeys format like base64 keys, hex
+                                keys as well as post request of license url</p>
+                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto mb-8">
+<code>1. Clearkey Hex
+#KODIPROP:inputstream.adaptive.license_key=edf1a715de9748638dd2fad75a419af2:2f5a3199b26e9b693ae881af7ff864cf
+
+
+2. Base64 Encoded Json
+{
+    "keys": [
+      {
+        "kty": "oct",
+        "k": "t+Aauiwwex8FBX6RqdFQ0g",
+        "kid": "4WQhz3w3TFeo9+kQSfWM2Q"
+      }
+    ],
+    "type": "temporary"
+  }
+
+
+3. Post license url returning base64 json/Hex
+https://license.to/post
+</code>
+                                </pre>
+
+
+
+                            <div class="mb-8">
+                                <h3 class="text-xl font-semibold mb-2" style="color: #61affe;">Json Format</h3>
+                                <p class="mb-4">Sample JSON Example </p>
+                                <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+    <code>
+    [
+        {
+          "Title": "Star Sports 1 HD",
+          "Poster": "https://i.postimg.cc/QM22x0Qj/Star-Sports-1-HD.png",
+          "Url": "https://madstream.one/hls/crichd/index.php?id=starhindi&e=.m3u8"
+        },
+        {
+          "Title": "Star Sports 1 Hindi HD",
+          "Poster": "https://i.postimg.cc/MZbCq0v8/Star-Sports-1-HD-Hindi.png",
+          "Url": "https://madstream.one/hls/crichd/index.php?id=starhindi&e=.m3u8"
+        }
+    ]
+    </code>
+    </pre>
+                                <br>
+                                <code><b>Title [Mandatory]</b></code>
+                                <p>Referers to name of stream</p>
+                                <p class="mb-4">You can also use => name, filename, event_name, event {Case insensitive}
+                                </p>
+
+                                <code><b>Poster [Mandatory]</b></code>
+                                <p>Referers to name of poster of stream</p>
+                                <p class="mb-4">You can also use => image, logo, src, {Case insensitive}</p>
+
+                                <code><b>Url [Mandatory]</b></code>
+                                <p>Referers to name of url of stream</p>
+                                <p class="mb-4">You can also use => link, file, stream, {Case insensitive}</p>
+
+                                <code><b>id [Mandatory]</b></code>
+                                <p>Referers to id of stream</p>
+                                <p class="mb-4">You can also use => link, file, stream, {Case insensitive}</p>
+
+                                <code><b>headers [optional]</b></code>
+                                <p>Referers to headers of stream</p>
+                                <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+    <code>
+    headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
+        "Referer": "https://example.com",
+        "Cookie": "sessionid=1234567890abcdef",
+    }
+    </code>
+    </pre>
+
+
+                            </div>
+
+
+                        </section>
+
+
+
+ <!---CINEMA SECTION STARTS HERE-->                       
+
+                        <section id="cinema" class="mb-12">
+                            <h2 class="text-2xl font-semibold mb-4">Cinema</h2>
+                            <p class="mb-4">Rogplay uses TheMovieDB (TMDB) Api to display content on cinema screen, you
+                                can check Documentation here <a style="color: #61affe;"
+                                    href="https://developer.themoviedb.org/docs/getting-started">TMDB
+                                    Documentation</a>
+                            </p>
+                            <p class="mb-4">Note: Cinema addons required to use make cinema functionable</p>
+                            <p class="mb-4">Cinema Addons Example 👇</p>
+
+                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto mb-4">
+<code>
+[
+  {
+    "version": "1.0",
+    "author": "HIGHRISK",
+    "title": "TMDB Cinema",
+    "logo": "https://raw.githubusercontent.com/rogplay/public/refs/heads/main/assets/tmdb.jpg",
+    "url": "https://raw.githubusercontent.com/kunwarxshashank/rogplay_addons/refs/heads/main/cinema/servers.json",
+    "type": "cinema",
+    "description": "Cinema Addons"
+  }
+]</code></pre>
+                            <p class="mb-6">Title Logo Version and Auhtor will display in addons page.</p>
+
+                            <p class="mb-2"><span class="method method-post">Cinema Addons Url</span>
+                            <p class="mb-2">This url contains actual cinema api which uses TMDB (themoviedb) ID, to
+                                fetch movies and series informations.</p>
+                            <p class="mb-2">Cinema Json API Example 👇</p>
+
+                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto mb-4"><code>
+[ 
+  {
+      "tvurl": "https://example.com/api/series?id=${tmdb}&season=${season}&episode=${episode}",
+      "movieurl": "https://example.com/api/movies?id=${tmdb}",
+      "title": "title",
+      "url": "file",
+      "id": "id"
+  }
+]
+</code></pre>
+
+
+
+                            <code>1. tvurl</code>
+                            <p class="mb-2">This url refers for series api which is used to fetch data from api url,
+                                must contains tmdb id season number and episode id, however you dont' need to pass
+                                tmdbid, season, and epsiode id in place of ${tmdb} ${season} ${episode} it acts as
+                                variable which fetch data from parameters</p>
+                            <p class="mb-2">This is how tvurl
+                                https://example.com/api/series?id=${tmdb}&season=${season}&episode=${episode} response
+                                look like </p>
+                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto mb-4"><code>
+[
+    {
+      "title": "Hindi",
+      "id": "d1fe1b17bd308b9c1cc9492def1b7661",
+      "file": "https://i-cdn-0.vino332gptk.com/stream2/i-cdn-0/301d9c67dd7860e62d9f925a8b944af1/MJTMsp1RshGTygnMNRUR2N2MSlnWXZEdMNDZzQWe5MDZzMmdZJTO1R2RWVHZDljekhkSsl1VwYnWtx2cihVT2lVba12TUxWbO1WS5llMRNjTUFVeOpWQ000VFFjWql0dOpXUz4ERSxWW6lVP:1738738855:82.180.147.152:68c79641163b24cb45b4b73d8da964224569f285925fcd8caf6f1117ce033a41/index.m3u8"
+    },
+    {
+      "title": "Tamil",
+      "id": "9962f8a48a95bf4da27960d01b5fb10c",
+      "file": "https://i-cdn-0.vino332gptk.com/stream2/i-cdn-0/301d9c67dd7860e62d9f925a8b944af1/MJTMsp1RshGTygnMNRUR2N2MSlnWXZEdMNDZzQWe5MDZzMmdZJTO1R2RWVHZDljekhkSsl1VwYnWtx2cihVT250RJd3TUNGMPdUVz8EVFdXTXJFaNpnRt1kaZpXW6lUNOJTV4pVbNdnTqVVP:1738738855:82.180.147.152:1b5a6f3e653dafd47c32b3c1580a5b7cbb0bd6637cf3daf0c4fc4fbba9d9f287/index.m3u8"
+    },
+    {
+      "title": "Telugu",
+      "id": "49e47e58e1cd2e9a683ab2ee0f3a0f2c",
+      "file": "https://i-cdn-0.vino332gptk.com/stream2/i-cdn-0/301d9c67dd7860e62d9f925a8b944af1/MJTMsp1RshGTygnMNRUR2N2MSlnWXZEdMNDZzQWe5MDZzMmdZJTO1R2RWVHZDljekhkSsl1VwYnWtx2cihVT290RNlXW6NWeOR0a3pFRatmTqVlMap2Z65kMWlmWEJkaPdlRo5keBFjTXlVP:1738738855:82.180.147.152:0335c5e302ea54d98ddcad1811f3e81f388af6459b282be42a37b85d63a76ca0/index.m3u8"
+    }
+]
+</code></pre>
+
+                            <code>2. movie</code>
+                            <p class="mb-2">This url refers for movie api which is used to fetch data from api url, must
+                                contains tmdb id, however you dont' need to pass tmdbid, in place of ${tmdb} it acts as
+                                variable which fetch data from parameters</p>
+                            <code>3. title</code>
+                            <p class="mb-2">This object points variable which uses to show title of content e.g. Sever -
+                                Hindi</p>
+                            <code>4. url</code>
+                            <p class="mb-2">This object points variable which indicate url of content e.g.
+                                https://example.m3u8i</p>
+                            <code>5. id</code>
+                            <p class="mb-2">This object points variable which indicate id of content e.g. 1, 2</p>
+                            <code>6. headers</code>
+                            <p class="mb-2">Referers to header of stream</p>
+                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+                            <code>
+headers: {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
+    "Referer": "https://example.com",
+    "Cookie": "sessionid=1234567890abcdef",
+}
+                            </code>
+                            </pre>
+
+                        </section>
+
+
+
+<!--- Movie section starts here-->
+
+                        <section id="movie" class="mb-12">
+                            <h2 class="text-2xl font-semibold mb-4">Movie</h2>
+                            <p class="mb-4">Movie are seamless feature of Rogplay, allow you create and play anything, unlike other type, they give full fledge access to streaming</p>
+                            <p class="mb-4">Note: Cinema addons required to use make cinema functionable</p>
+                            <p class="mb-4">Movie Addons Example 👇</p>
+
+                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto mb-4">
+<code>
+[
+    {
+        "version": "1.0",
+        "author": "HIGHRISK",
+        "title": "Hindi Movie",
+        "logo": "https://yt3.googleusercontent.com/ytc/AIdro_maBL20YKBdGvd0wLHE-4plrMQ24c4GOys8J61jyx4A3Q=s900-c-k-c0x00ffffff-no-rj",
+        "url": "https://hindimovie.vercel.app",
+        "type": "movie",
+        "description": "Movies & Series Addon of https://111.90.159.132/ "
+    }
+]</code></pre>
+                            <p class="mb-6">Title Logo Version and Auhtor will display in addons page.</p>
+
+                            <p class="mb-2"><span class="method method-post">Movie Addons Url</span>
+                            <p class="mb-2">This is entrypoint of your api, all the parameters like search, page pass here</p>
+                            <p class="mb-2"><b>Searching a movie</b></p>
+                            <p class="mb-2">https://hindimovie.vercel.app/?search=your_search</p>
+                            <br>
+                            <p class="mb-2">here param <b>search</b> is a search api, it uses this param in app to fetch content from api and displaying in app, your search result should look like this</p>
+                            <p class="mb-2"><b>pagination of movie list</b></p>
+                            <p class="mb-2">https://hindimovie.vercel.app/?page=pagenum</p>
+                            <p class="mb-2">here param <b>page</b> is used to retrive response when fetching larger contents</p>
+                            <br>
+                            <p class="mb-2"><b>Response of search and pagination url</b></p>
+
+                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto mb-4"><code>
+[
+  {
+    "url": "https://hindimovie.vercel.app/?url=https://111.90.159.132/action/titanic-2018/",
+    "title": "Titanic 2018",
+    "logo": "https://111.90.159.132/wp-content/uploads/2024/04/Titanic-2018-152x228.jpg"
+  },
+  {
+    "url": "https://hindimovie.vercel.app/?url=https://111.90.159.132/eps/titans-season-3-epi-6/",
+    "title": "Titans Season 3 Epi 6",
+    "logo": "https://111.90.159.132/wp-content/uploads/2023/04/6mi4lwYuKWBmy3Ie0Xp5YOd2dv8-152x228.jpg"
+  },
+  {
+    "url": "https://hindimovie.vercel.app/?url=https://111.90.159.132/fantasy/wrath-of-the-titans-082024/",
+    "title": "Wrath of the Titans 082024",
+    "logo": "https://111.90.159.132/wp-content/uploads/2024/01/b9n2R3xZWQ8MVZgndQoV34stS0h-152x228.jpg"
+  }
+]
+</code></pre>
+
+
+
+                            <code>1. url</code>
+                            <p class="mb-2">This url is a entrypoint of the stream url json, your stream json will appear on fetching it</p>
+                            <p class="mb-2">Your url response should look like this </p>                            
+                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto mb-4"><code>
+[
+    {
+      "title": "Hindi",
+      "id": "d1fe1b17bd308b9c1cc9492def1b7661",
+      "file": "https://i-cdn-0.vino332gptk.com/stream2/i-cdn-0/301d9c67dd7860e62d9f925a8b944af1/MJTMsp1RshGTygnMNRUR2N2MSlnWXZEdMNDZzQWe5MDZzMmdZJTO1R2RWVHZDljekhkSsl1VwYnWtx2cihVT2lVba12TUxWbO1WS5llMRNjTUFVeOpWQ000VFFjWql0dOpXUz4ERSxWW6lVP:1738738855:82.180.147.152:68c79641163b24cb45b4b73d8da964224569f285925fcd8caf6f1117ce033a41/index.m3u8"
+      "headers": {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
+        "Referer": "https://example.com",
+        "Cookie": "sessionid=1234567890abcdef"
+      }
+    },
+    {
+      "title": "Tamil",
+      "id": "9962f8a48a95bf4da27960d01b5fb10c",
+      "file": "https://i-cdn-0.vino332gptk.com/stream2/i-cdn-0/301d9c67dd7860e62d9f925a8b944af1/MJTMsp1RshGTygnMNRUR2N2MSlnWXZEdMNDZzQWe5MDZzMmdZJTO1R2RWVHZDljekhkSsl1VwYnWtx2cihVT250RJd3TUNGMPdUVz8EVFdXTXJFaNpnRt1kaZpXW6lUNOJTV4pVbNdnTqVVP:1738738855:82.180.147.152:1b5a6f3e653dafd47c32b3c1580a5b7cbb0bd6637cf3daf0c4fc4fbba9d9f287/index.m3u8"
+    },
+    {
+      "title": "Telugu",
+      "id": "49e47e58e1cd2e9a683ab2ee0f3a0f2c",
+      "file": "https://i-cdn-0.vino332gptk.com/stream2/i-cdn-0/301d9c67dd7860e62d9f925a8b944af1/MJTMsp1RshGTygnMNRUR2N2MSlnWXZEdMNDZzQWe5MDZzMmdZJTO1R2RWVHZDljekhkSsl1VwYnWtx2cihVT290RNlXW6NWeOR0a3pFRatmTqVlMap2Z65kMWlmWEJkaPdlRo5keBFjTXlVP:1738738855:82.180.147.152:0335c5e302ea54d98ddcad1811f3e81f388af6459b282be42a37b85d63a76ca0/index.m3u8"
+    }
+]
+</code></pre>
+                            <code>1. id</code>
+                            <p class="mb-2">Referers to title of stream </p>
+                            <code>2. title</code>
+                            <p class="mb-2">Referers to title of stream </p>
+                            <code>3. file</code>
+                            <p class="mb-2">Referers to url of stream </p>                           
+                            <code>4. headers {optional}</code>
+                            <p class="mb-2">Referers to headers </p>   
+
+
+                        </section>
+                        
+
+
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-muted py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <p class="text-sm text-gray-400">&copy; 2025 Rogplay. All rights reserved.</p>
+                <nav class="flex space-x-4">
+                    <a href="https://rogplay.github.io/privacy-policy.html"
+                        class="text-sm text-gray-400 hover:text-white">Privacy Policy</a>
+                    <a href="https://rogplay.github.io/terms-of-service.html"
+                        class="text-sm text-gray-400 hover:text-white">Terms of Service</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const cursorGlow = document.getElementById('cursor-glow');
+        let isMoving = false;
+        let fadeOutTimeout;
+
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX - 100;
+            const y = e.clientY - 100;
+
+            cursorGlow.style.left = `${x}px`;
+            cursorGlow.style.top = `${y}px`;
+
+            if (!isMoving) {
+                isMoving = true;
+                cursorGlow.style.opacity = '1';
+            }
+
+            clearTimeout(fadeOutTimeout);
+            fadeOutTimeout = setTimeout(() => {
+                cursorGlow.style.opacity = '0';
+                isMoving = false;
+            }, 300);
+        });
+
+        document.addEventListener('mouseleave', () => {
+            cursorGlow.style.opacity = '0';
+        });
+
+        // Populate category navigation
+        const categories = [
+            { id: 'introduction', name: 'Introduction' },
+            { id: 'addons', name: 'Addons' },
+            { id: 'streaming', name: 'Streaming' },
+            { id: 'cinema', name: 'Cinema' },
+            { id: 'movie', name: 'Movie' }
+        ];
+
+        const categoryNav = document.getElementById('category-nav');
+        categories.forEach(category => {
+            const link = document.createElement('a');
+            link.href = `#${category.id}`;
+            link.className = 'block py-2 text-base font-medium text-gray-300 hover:text-primary transition-colors';
+            link.textContent = category.name;
+            categoryNav.appendChild(link);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Highlight active category in navigation
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeLink = document.querySelector(`#category-nav a[href="#${entry.target.id}"]`);
+                    document.querySelectorAll('#category-nav a').forEach(link => {
+                        link.classList.remove('text-primary');
+                    });
+                    if (activeLink) {
+                        activeLink.classList.add('text-primary');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section[id]').forEach((section) => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+
+</html>

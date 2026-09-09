@@ -1,340 +1,489 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rogplay Addons</title>
   <meta name="description" content="Collection of Free and Public Addons for Rogplay app available online">
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            background: '#030712',
+            surface: '#111827',
+            primary: '#0ea5e9',
+            secondary: '#8b5cf6'
+          },
+          animation: {
+            'blob': 'blob 7s infinite',
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    
     body {
-      font-family: 'Inter', sans-serif;
-    }
-    
-    .tab-content {
-      display: none;
-    }
-    
-    .tab-content.active {
-      display: block;
+      background-color: #030712;
+      color: #f3f4f6;
     }
 
-    /* Mobile menu styles */
-    .mobile-menu {
-      transform: translateX(-100%);
-      transition: transform 0.3s ease-in-out;
-    }
-    
-    .mobile-menu.active {
-      transform: translateX(0);
+    .glass-card {
+      background: rgba(17, 24, 39, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Video container for responsive iframe */
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-      height: 0;
-      overflow: hidden;
+    .glass-card:hover {
+      border-color: rgba(14, 165, 233, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px -10px rgba(14, 165, 233, 0.2);
     }
-    
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 0.5rem;
+
+    .glass-nav {
+      background: rgba(3, 7, 18, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .filter-btn {
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 4px 15px -3px rgba(14, 165, 233, 0.4);
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #030712;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #374151;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #4b5563;
+    }
+
+    .search-input:focus-within {
+      box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.5);
+      border-color: rgba(14, 165, 233, 0.8);
     }
   </style>
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-violet-950">
-  <!-- Navbar -->
-  <header class="container mx-auto px-4 py-4">
-    <nav class="flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <div class="relative h-8 w-8 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full">
-          <div class="absolute -top-1 -right-1 h-3 w-3 bg-amber-400 rounded-full"></div>
-        </div>
-        <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
-          ROGPLAY
-        </span>
-      </div>
+<body class="min-h-screen relative overflow-x-hidden antialiased">
+  <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+    <div
+      class="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob">
+    </div>
+    <div
+      class="absolute top-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-2000">
+    </div>
+    <div
+      class="absolute -bottom-32 left-1/2 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-4000">
+    </div>
+  </div>
 
-      <!-- Desktop Menu -->
-      <div class="hidden md:flex items-center gap-6">
-        <a href="#home" class="text-white hover:text-cyan-400 transition-colors">Home</a>
-        <a href="#api" class="text-white hover:text-cyan-400 transition-colors">API</a>
-        <a href="#video" class="text-white hover:text-cyan-400 transition-colors">Tutorials</a>
-        <a href="#cta" class="text-white hover:text-cyan-400 transition-colors">How to Use</a>
-        <a href="privacypolicy.html" class="text-white hover:text-cyan-400 transition-colors">Privacy Policy</a>
-        <a href="contact.html" class="text-white hover:text-cyan-400 transition-colors">Contact Us</a>
-        <a href="https://telegram.me/rogplayaddons" class="px-4 py-2 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white">
-          Join Telegram
-        </a>
-      </div>
-
-      <!-- Mobile Menu Button -->
-      <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
-        <i data-lucide="menu" class="w-6 h-6"></i>
-      </button>
-    </nav>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 h-full w-64 bg-indigo-950 z-50 shadow-lg p-4 md:hidden">
-      <div class="flex justify-between items-center mb-6">
-        <div class="flex items-center gap-2">
-          <div class="relative h-8 w-8 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full">
-            <div class="absolute -top-1 -right-1 h-3 w-3 bg-amber-400 rounded-full"></div>
+  <header class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+    <div class="container mx-auto px-4 lg:px-8 py-4">
+      <nav class="flex items-center justify-between">
+        <a href="#" class="flex items-center gap-3 group">
+          <div
+            class="relative h-10 w-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+            <img src="https://raw.githubusercontent.com/rogplay/rogplay.github.io/refs/heads/main/assets/rogplay.svg"
+              alt="Rogplay Logo" class="w-full h-full object-contain" />
           </div>
-          <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
-            ROGPLAY
+          <span
+            class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 tracking-tight">
+            ROGPLAY ADDONS
           </span>
-        </div>
-        <button id="close-menu" class="text-white focus:outline-none">
-          <i data-lucide="x" class="w-6 h-6"></i>
-        </button>
-      </div>
-      <div class="flex flex-col gap-4">
-        <a href="#home" class="text-white hover:text-cyan-400 transition-colors py-2 border-b border-white/10">Home</a>
-        <a href="#api" class="text-white hover:text-cyan-400 transition-colors py-2 border-b border-white/10">API</a>
-        <a href="#player" class="text-white hover:text-cyan-400 transition-colors py-2 border-b border-white/10">Player</a>
-        <a href="#video" class="text-white hover:text-cyan-400 transition-colors py-2 border-b border-white/10">Tutorials</a>
-        <a href="#pricing" class="text-white hover:text-cyan-400 transition-colors py-2 border-b border-white/10">Pricing</a>
-        <a href="#cta" class="text-white hover:text-cyan-400 transition-colors py-2 border-b border-white/10">How to Use</a>
-        <a href="https://telegram.me/rogplayaddons" class="mt-4 px-4 py-2 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white text-center">
-          Join Telegram
         </a>
-      </div>
+
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#home" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Home</a>
+          <a href="#addons" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Addons</a>
+          <a href="#tutorial" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Tutorial</a>
+          <a href="#api" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Developers</a>
+          <a href="https://telegram.me/rogplayaddons" target="_blank"
+            class="px-5 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all flex items-center gap-2 border border-white/5">
+            <i data-lucide="send" class="w-4 h-4"></i>
+            Join Community
+          </a>
+        </div>
+
+        <button id="menu-toggle"
+          class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2 bg-white/5 rounded-lg border border-white/10">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </nav>
+    </div>
+
+    <div id="mobile-menu"
+      class="hidden md:hidden absolute top-full left-0 w-full glass-nav border-t border-white/5 py-4 px-4 flex-col gap-4 shadow-2xl">
+      <a href="#home"
+        class="mobile-link text-gray-300 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 flex items-center gap-3">
+        <i data-lucide="home" class="w-5 h-5 text-primary"></i> Home
+      </a>
+      <a href="#addons"
+        class="mobile-link text-gray-300 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 flex items-center gap-3">
+        <i data-lucide="grid" class="w-5 h-5 text-secondary"></i> Addons
+      </a>
+      <a href="#tutorial"
+        class="mobile-link text-gray-300 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 flex items-center gap-3">
+        <i data-lucide="play-circle" class="w-5 h-5 text-emerald-400"></i> Tutorial
+      </a>
+      <a href="#api"
+        class="mobile-link text-gray-300 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 flex items-center gap-3">
+        <i data-lucide="code" class="w-5 h-5 text-amber-400"></i> Developers
+      </a>
+      <a href="https://telegram.me/rogplayaddons" target="_blank"
+        class="mt-2 px-4 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white text-center font-medium shadow-lg flex items-center justify-center gap-2">
+        <i data-lucide="send" class="w-5 h-5"></i>
+        Join Community Telegram
+      </a>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section id="home" class="container mx-auto px-4 py-16 md:py-10 text-center">
-    <div class="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm text-white/90 mb-6">
-      <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i>
-      <span>Providing Best Streaming Addons</span>
-    </div>
-    <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 max-w-4xl mx-auto leading-tight">
-      All New Stream, Channels, Cinema Addons
-    </h1>
-    <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-10">
-      for Rogplay in a single place
-    </p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="https://telegram.me/rogplayaddons" class="px-6 py-3 text-lg rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white">
-        JOIN TELEGRAM
-      </a>
-      <a href="https://play.google.com/store/apps/details?id=com.rogplay.org" class="px-6 py-3 text-lg rounded-md text-white border border-white/20 hover:bg-white/10">
-       Download Rogplay
-      </a>
-    </div>
-  </section>
-
-<!-- API Demo Section -->
-<section id="api" class="container mx-auto px-4 py-8">
-    <div class="max-w-5xl mx-auto bg-black/20 backdrop-blur-sm rounded-xl p-4 md:p-8 border border-white/10 shadow-xl">
-        <div class="w-full"></div>
-            <div id="tabs-container" class="bg-black/30 mb-4 inline-flex rounded-md"></div>
-            <div id="content-container"></div>
-        </div>
-    </div>
-</section>
-
-<script>
-    const apiUrl = 'https://raw.githubusercontent.com/kunwarxshashank/rogplay_addons/refs/heads/main/alladdons.json'; // Replace with your JSON URL
-
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            const tabsContainer = document.getElementById('tabs-container');
-            const contentContainer = document.getElementById('content-container');
-
-            const groupedAddons = data.reduce((acc, addon) => {
-                if (!acc[addon.type]) {
-                    acc[addon.type] = [];
-                }
-                acc[addon.type].push(addon);
-                return acc;
-            }, {});
-
-            Object.keys(groupedAddons).forEach((type, typeIndex) => {
-                // Create tab button for each type
-                const tabButton = document.createElement('button');
-                tabButton.className = `tab-button px-4 py-2 rounded-md flex items-center gap-2 text-white ${typeIndex === 0 ? 'bg-cyan-500/20' : ''}`;
-                tabButton.setAttribute('data-tab', `tab-${type}`);
-                tabButton.innerHTML = `<i data-lucide="${type === 'cinema' ? 'film' : 'tv'}" class="w-4 h-4"></i> ${type.toUpperCase()}`;
-                tabsContainer.appendChild(tabButton);
-
-                // Create tab content for each type
-                const tabContent = document.createElement('div');
-                tabContent.id = `tab-${type}`;
-                tabContent.className = `tab-content text-white/90 font-mono text-sm relative ${typeIndex === 0 ? 'active' : ''}`;
-                tabContent.innerHTML = groupedAddons[type]
-                    .map(addon => `
-                        <div class="p-4 bg-black/40 rounded-lg mb-4">
-                            <div class="flex items-center gap-4 mb-3">
-                                <img src="${addon.logo}" alt="${addon.title}" class="w-12 h-12 rounded-md shrink-0">
-                                <div class="min-w-0">
-                                    <h3 class="text-lg font-bold truncate">${addon.title}</h3>
-                                    <p class="text-cyan-400 text-sm">By ${addon.author}</p>
-                                    <p class="text-white/70 text-sm line-clamp-2">${addon.description}</p>
-                                </div>
-                            </div>
-                            <div class="flex flex-col sm:flex-row gap-2">
-                                <a href="https://web.rogplay.app/addons?url=${encodeURIComponent(addon.addonurl)}" target="_blank"
-                                    class="flex-1 px-4 py-2 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white text-center text-sm">
-                                    Install in Web
-                                </a>
-                                <a href="rogplay://${addon.addonurl.replace(/^https?:\/\//, '')}"
-                                    class="flex-1 px-4 py-2 rounded-md text-white border border-white/20 hover:bg-white/10 text-center text-sm">
-                                    Install on App
-                                </a>
-                                <button 
-                                    class="copy-btn px-4 py-2 rounded-md bg-white/10 hover:bg-white/20 text-white/80 text-sm"
-                                    data-url="${addon.addonurl}">
-                                    Copy URL
-                                </button>
-                            </div>
-                        </div>
-                    `)
-                    .join('');
-                contentContainer.appendChild(tabContent);
-            });
-            // Add copy functionality for addon URLs
-            document.querySelectorAll('.copy-btn').forEach(button => {
-                button.addEventListener('click', () => {
-                    const url = button.getAttribute('data-url');
-                    navigator.clipboard.writeText(url).then(() => {
-                        button.innerText = 'Copied!';
-                        setTimeout(() => button.innerText = 'Copy URL', 2000);
-                    }).catch(err => console.error('Error copying URL:', err));
-                });
-            });
-            // Add tab functionality
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.addEventListener('click', () => {
-                    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('bg-cyan-500/20'));
-                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-                    button.classList.add('bg-cyan-500/20');
-                    document.getElementById(`${button.getAttribute('data-tab')}`).classList.add('active');
-                });
-            });
-
-            // Add copy functionality
-            document.addEventListener('click', (e) => {
-                if (e.target.classList.contains('copy-btn')) {
-                    const url = e.target.getAttribute('data-url');
-                    navigator.clipboard.writeText(url).then(() => {
-                        e.target.innerText = 'Copied!';
-                        setTimeout(() => e.target.innerText = 'Copy URL', 2000);
-                    }).catch(err => console.error('Error copying URL:', err));
-                }
-            });
-
-            lucide.createIcons(); // Refresh icons
-        })
-        .catch(error => console.error('Error fetching addons:', error));
-</script>
-
-<!-- Add this section after the API Demo section -->
-<section id="player" class="container mx-auto px-4 py-16">
-  <div class="max-w-5xl mx-auto bg-black/20 backdrop-blur-sm rounded-xl p-4 md:p-8 border border-white/10 shadow-xl">
-    <h2 class="text-3xl font-bold text-white mb-6 text-center">How to use Addons ?</h2>
-    <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto text-center">
-      Watch this video to get insight
-    </p>
-        
-    <div id="video-container" class="aspect-video bg-black/50 rounded-xl overflow-hidden flex items-center justify-center">
-
-      <video id="video-player" autoplay="on" class="w-full h-full" src="https://raw.githubusercontent.com/rogplay/rogplay.github.io/refs/heads/main/howtoadd.mp4" controls></video>
-    </div>
-    
-    <div class="mt-6 text-center">
-      <p class="text-white/70 text-sm">
-        Bookmark <b>https://rogplay.github.io</b> to get latest addons.
+  <section id="home" class="pt-32 pb-16 md:pt-48 md:pb-24 px-4 relative">
+    <div class="container mx-auto text-center max-w-4xl relative z-10">
+      <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-[1.1]">
+        Supercharge your <br class="hidden md:block" />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-400 to-secondary">Rogplay
+          Experience</span>
+      </h1>
+      <p class="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
+        Discover the best and Public Addons available across the Internet!
       </p>
-    </div>
-  </div>
-</section>
-
-
-  
-
-  
-  <!-- CTA Section -->
-  <section id="cta" class="container mx-auto px-4 py-16">
-    <div class="max-w-4xl mx-auto bg-gradient-to-r from-cyan-900/40 to-blue-900/40 rounded-2xl p-8 md:p-12 text-center backdrop-blur-sm border border-white/10">
-      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-        Want to create own Addons ?
-      </h2>
-      <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-        Follow the Api-Docs to create a custom addon as you want !
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="https://api.rogplay.site/installation.html" class="px-6 py-3 text-lg rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white">
-          See tutorial
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="#addons"
+          class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-medium hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 flex items-center justify-center gap-2">
+          <i data-lucide="compass" class="w-5 h-5"></i>
+          Explore Addons
         </a>
-        <a href="https://rogplay.github.io/apidocs.html" class="px-6 py-3 text-lg rounded-md text-white border border-white/20 hover:bg-white/10">
-          Api-Docs
+        <a href="https://play.google.com/store/apps/details?id=com.rogplay.org" target="_blank"
+          class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/5 text-white font-medium hover:bg-white/10 border border-white/10 transition-all duration-300 flex items-center justify-center gap-2">
+          <i data-lucide="download" class="w-5 h-5"></i>
+          Download App
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="container mx-auto px-4 py-8 border-t border-white/10">
-    <div class="flex flex-col md:flex-row justify-between items-center">
-      <div class="flex items-center gap-2 mb-4 md:mb-0">
-        <div class="relative h-6 w-6 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full">
-          <div class="absolute -top-1 -right-1 h-2 w-2 bg-amber-400 rounded-full"></div>
+  <section id="addons" class="py-16 px-4">
+    <div class="container mx-auto max-w-7xl">
+
+      <div
+        class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6 bg-surface/50 p-6 rounded-2xl border border-white/5 backdrop-blur-md">
+        <div>
+          <h2 class="text-3xl font-bold text-white mb-2">Addons Directory</h2>
+          <p class="text-gray-400 text-sm">Find and install your favorite extensions</p>
         </div>
-        <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
-          ROGPLAY
-        </span>
+
+        <div class="flex flex-col sm:flex-row gap-4 flex-1 max-w-2xl justify-end">
+          <div
+            class="relative w-full sm:w-80 search-input rounded-xl border border-white/10 bg-black/20 transition-all">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
+            </div>
+            <input type="text" id="search-input"
+              class="block w-full pl-10 pr-3 py-3 rounded-xl bg-transparent text-white placeholder-gray-500 focus:outline-none text-sm"
+              placeholder="Search addons, authors...">
+          </div>
+        </div>
       </div>
-      <div class="text-white/60 text-sm">
-        © 2023 ROGPLAY. All rights reserved.
+
+      <div class="flex flex-wrap gap-3 mb-8" id="filters-container">
+        <button
+          class="filter-btn active px-5 py-2.5 rounded-xl border border-white/10 text-gray-300 text-sm font-medium flex items-center gap-2 hover:bg-white/5"
+          data-filter="all">
+          <i data-lucide="layers" class="w-4 h-4"></i> All Addons
+        </button>
+      </div>
+
+      <div class="flex justify-center py-12" id="loading-spinner">
+        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      </div>
+
+      <div id="addons-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+      </div>
+
+      <div id="no-results" class="hidden py-16 text-center">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 mb-4">
+          <i data-lucide="search-x" class="w-8 h-8 text-gray-500"></i>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">No addons found</h3>
+        <p class="text-gray-400">Try adjusting your search or filters.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="tutorial" class="py-24 px-4 relative">
+    <div class="container mx-auto max-w-5xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">How to Use Addons</h2>
+        <p class="text-gray-400 text-lg max-w-2xl mx-auto">Watch this quick guide to learn how to install and manage
+          your extensions.</p>
+      </div>
+
+      <div class="relative group rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black/40">
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-10">
+        </div>
+        <div class="aspect-video relative z-0">
+          <video id="tutorial-video" class="w-full h-full object-cover"
+            src="https://raw.githubusercontent.com/rogplay/rogplay.github.io/refs/heads/main/howtoadd.mp4" controls
+            preload="metadata"></video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="api" class="py-24 px-4">
+    <div class="container mx-auto max-w-4xl relative">
+      <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 blur-3xl -z-10 rounded-full"></div>
+      <div class="glass-card rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-8 opacity-10 rotate-12 pointer-events-none">
+          <i data-lucide="code-2" class="w-64 h-64 text-white"></i>
+        </div>
+        <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 relative z-10">Build Your Own</h2>
+        <p class="text-gray-300 text-lg mb-10 max-w-2xl mx-auto relative z-10">
+          Join our developer ecosystem. Create custom addons and share them with thousands of users using our
+          simple API.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+
+          <a href="https://rogplay.github.io/apidocs.html"
+            class="px-8 py-4 rounded-xl bg-black/50 text-white font-medium hover:bg-black/70 border border-white/10 transition-colors flex items-center justify-center gap-2 backdrop-blur-md">
+            <i data-lucide="terminal" class="w-5 h-5"></i>
+            API Reference
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t border-white/5 bg-black/40 backdrop-blur-xl py-12 px-4 mt-auto">
+    <div class="container mx-auto max-w-7xl">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex items-center gap-3">
+          <div class="h-8 w-8 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
+            <i data-lucide="play" class="w-4 h-4 text-white fill-white"></i>
+          </div>
+          <span class="text-xl font-bold text-white tracking-tight">ROGPLAY</span>
+        </div>
+
+        <div class="flex gap-6 text-sm text-gray-400">
+          <a href="privacypolicy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="addonspolicy.html" class="hover:text-white transition-colors">Addons Policy</a>
+          <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
+          <a href="about.html" class="hover:text-white transition-colors">About Us</a>
+        </div>
+
+        <div class="text-sm text-gray-500">
+          © <span id="year"></span> Rogplay. All rights reserved.
+        </div>
       </div>
     </div>
   </footer>
 
   <script>
     lucide.createIcons();
-    
-    // Mobile menu functionality
+    document.getElementById('year').textContent = new Date().getFullYear();
+
     const menuToggle = document.getElementById('menu-toggle');
-    const closeMenu = document.getElementById('close-menu');
     const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
 
     menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.add('active');
+      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.toggle('flex');
     });
 
-    closeMenu.addEventListener('click', () => {
-      mobileMenu.classList.remove('active');
-    });
-
-    // Close menu when clicking on a link
-    mobileMenuLinks.forEach(link => {
+    mobileLinks.forEach(link => {
       link.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
       });
     });
 
-    // Close menu when clicking outside
+    const apiUrl = 'https://raw.githubusercontent.com/kunwarxshashank/rogplay_addons/refs/heads/main/alladdons.json';
+    let allAddonsData = [];
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    const addonsGrid = document.getElementById('addons-grid');
+    const loadingSpinner = document.getElementById('loading-spinner');
+    const noResults = document.getElementById('no-results');
+    const filtersContainer = document.getElementById('filters-container');
+    const searchInput = document.getElementById('search-input');
+
+    fetch(apiUrl)
+      .then(res => res.json())
+      .then(data => {
+        allAddonsData = data;
+        loadingSpinner.classList.add('hidden');
+        addonsGrid.classList.remove('hidden');
+
+        setupFilters(data);
+        renderAddons();
+      })
+      .catch(err => {
+        console.error('Error fetching addons:', err);
+        loadingSpinner.innerHTML = '<div class="text-red-400 flex items-center gap-2"><i data-lucide="alert-circle"></i> Failed to load addons</div>';
+        lucide.createIcons();
+      });
+
+    function setupFilters(data) {
+      const types = [...new Set(data.map(addon => addon.type))].filter(Boolean);
+
+      types.forEach(type => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn px-5 py-2.5 rounded-xl border border-white/10 text-gray-300 text-sm font-medium flex items-center gap-2 hover:bg-white/5 capitalize';
+        btn.dataset.filter = type;
+
+        let iconName = 'box';
+        if (type.toLowerCase() === 'cinema') iconName = 'film';
+        else if (type.toLowerCase() === 'tv' || type.toLowerCase() === 'iptv') iconName = 'tv';
+        else if (type.toLowerCase() === 'sports') iconName = 'activity';
+
+        btn.innerHTML = `<i data-lucide="${iconName}" class="w-4 h-4"></i> ${type}`;
+        filtersContainer.appendChild(btn);
+      });
+
+      lucide.createIcons();
+
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active', 'bg-white/5'));
+          e.currentTarget.classList.add('active');
+          currentFilter = e.currentTarget.dataset.filter;
+          renderAddons();
+        });
+      });
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.toLowerCase();
+      renderAddons();
+    });
+
+    function renderAddons() {
+      const filtered = allAddonsData.filter(addon => {
+        const matchesFilter = currentFilter === 'all' || addon.type === currentFilter;
+        const matchesSearch = addon.title.toLowerCase().includes(searchQuery) ||
+          (addon.description && addon.description.toLowerCase().includes(searchQuery)) ||
+          (addon.author && addon.author.toLowerCase().includes(searchQuery));
+        return matchesFilter && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        addonsGrid.classList.add('hidden');
+        noResults.classList.remove('hidden');
+      } else {
+        addonsGrid.classList.remove('hidden');
+        noResults.classList.add('hidden');
+
+        addonsGrid.innerHTML = filtered.map(addon => `
+          <div class="glass-card rounded-2xl p-6 flex flex-col h-full group">
+            <div class="flex gap-4 items-start mb-4">
+              <div class="relative shrink-0">
+                <div class="w-16 h-16 rounded-xl overflow-hidden bg-black/50 border border-white/10 p-1">
+                  <img src="${addon.logo || 'https://via.placeholder.com/64?text=Addon'}" alt="${addon.title}" class="w-full h-full object-contain rounded-lg" loading="lazy" onerror="this.src='https://via.placeholder.com/64?text=NA'">
+                </div>
+                ${addon.type ? `<span class="absolute -bottom-2 -right-2 text-[10px] uppercase font-bold bg-secondary text-white px-2 py-0.5 rounded-full shadow-lg border border-black">${addon.type}</span>` : ''}
+              </div>
+              
+              <div class="min-w-0 flex-1">
+                <h3 class="text-xl font-bold text-white truncate group-hover:text-primary transition-colors">${addon.title}</h3>
+                <p class="text-gray-400 text-sm mt-0.5 truncate">by <span class="text-gray-300 font-medium">${addon.author || 'Unknown'}</span></p>
+              </div>
+            </div>
+            
+            <p class="text-gray-400 text-sm mb-6 flex-1 line-clamp-3 leading-relaxed">
+              ${addon.description || 'No description available for this addon.'}
+            </p>
+            
+            <div class="flex gap-2 mt-auto">
+              <a href="https://web.rogplay.app/addons?url=${encodeURIComponent(addon.addonurl)}" target="_blank"
+                class="flex-1 px-4 py-2.5 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary text-center text-sm font-semibold transition-colors border border-primary/20 flex items-center justify-center gap-1.5">
+                <i data-lucide="globe" class="w-4 h-4"></i> Web
+              </a>
+              <a href="rogplay://${addon.addonurl.replace(/^https?:\/\//, '')}"
+                class="flex-1 px-4 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-center text-sm font-semibold transition-colors flex items-center justify-center gap-1.5 border border-white/5">
+                <i data-lucide="smartphone" class="w-4 h-4"></i> App
+              </a>
+              <button class="copy-btn w-10 shrink-0 flex items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors border border-white/5" data-url="${addon.addonurl}" title="Copy URL">
+                <i data-lucide="copy" class="w-4 h-4 pointer-events-none"></i>
+              </button>
+            </div>
+          </div>
+        `).join('');
+        lucide.createIcons();
+      }
+    }
+
     document.addEventListener('click', (e) => {
-      if (!mobileMenu.contains(e.target) && e.target !== menuToggle && !menuToggle.contains(e.target)) {
-        mobileMenu.classList.remove('active');
+      const copyBtn = e.target.closest('.copy-btn');
+      if (copyBtn) {
+        const url = copyBtn.getAttribute('data-url');
+        const icon = copyBtn.querySelector('i');
+
+        navigator.clipboard.writeText(url).then(() => {
+          const origHTML = copyBtn.innerHTML;
+          copyBtn.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-emerald-400 pointer-events-none"></i>';
+          copyBtn.classList.add('bg-emerald-400/10', 'border-emerald-400/20');
+          lucide.createIcons();
+
+          setTimeout(() => {
+            copyBtn.innerHTML = origHTML;
+            copyBtn.classList.remove('bg-emerald-400/10', 'border-emerald-400/20');
+            lucide.createIcons();
+          }, 2000);
+        }).catch(err => console.error('Error copying:', err));
       }
     });
 
-
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('shadow-2xl');
+      } else {
+        header.classList.remove('shadow-2xl');
+      }
+    });
   </script>
 </body>
+
 </html>

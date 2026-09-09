@@ -1,51 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Documentation - Rogplay</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: 'hsl(280, 100%, 50%)',
-                        secondary: 'hsl(160, 100%, 50%)',
-                        background: 'hsl(230, 30%, 10%)',
-                        muted: 'hsl(240, 20%, 20%)',
-                    }
-                }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Documentation - Rogplay</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            background: '#030712',
+            surface: '#111827',
+            primary: '#0ea5e9',
+            secondary: '#8b5cf6'
+          },
+          animation: {
+            'blob': 'blob 7s infinite',
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
             }
+          }
         }
-    </script>
-    <style>
-        .neon-glow {
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.5), 0 0 20px rgba(168, 85, 247, 0.3), 0 0 30px rgba(168, 85, 247, 0.1);
-        }
-
-        .neon-text {
-            text-shadow: 0 0 5px rgba(168, 85, 247, 0.5), 0 0 10px rgba(168, 85, 247, 0.3), 0 0 15px rgba(168, 85, 247, 0.1);
-        }
-
-        .neon-border {
-            box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2), 0 0 0 4px rgba(168, 85, 247, 0.2);
-        }
-
-        .cursor-glow {
-            position: fixed;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(168, 85, 247, 0) 70%);
-        }
-
-        .method {
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #030712;
+      color: #f3f4f6;
+    }
+    .glass-card {
+      background: rgba(17, 24, 39, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(14, 165, 233, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px -10px rgba(14, 165, 233, 0.2);
+    }
+    .glass-nav {
+      background: rgba(3, 7, 18, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #030712;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #374151;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #4b5563;
+    }
+    
+    .method {
             font-size: 0.8rem;
             padding: 0.1rem 0.5rem;
             border-radius: 0.25rem;
@@ -71,50 +102,95 @@
             background-color: #f93e3e;
             color: #fff;
         }
-    </style>
+    
+  </style>
 </head>
 
-<body class="bg-background text-white">
-    <div id="cursor-glow" class="cursor-glow"></div>
+<body class="min-h-screen flex flex-col relative overflow-x-hidden antialiased">
+  <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+    <div
+      class="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob">
+    </div>
+    <div
+      class="absolute top-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-2000">
+    </div>
+    <div
+      class="absolute -bottom-32 left-1/2 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-4000">
+    </div>
+  </div>
 
-    <nav class="fixed w-full z-50 bg-background/80 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <a href="#" class="flex items-center space-x-2">
-                        <div class="w-8 h-8"><img src="https://raw.githubusercontent.com/rogplay/rogplay.github.io/refs/heads/main/assets/rogplay.svg" /></div>
-                        <span class="text-xl font-bold">Rogplay</span>
-                    </a>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="https://rogplay.live/"
-                            class="text-gray-300 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                        <a href="https://rogplay.github.io/about.html"
-                            class="text-gray-300 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">About</a>
-                        <a href="https://rogplay.github.io/privacy-policy.html"
-                            class="text-gray-300 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">Privacy
-                            Policy</a>
-                    </div>
-                </div>
-            </div>
+  <header class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+    <div class="container mx-auto px-4 lg:px-8 py-4">
+      <nav class="flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="relative h-10 w-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+            <img src="https://raw.githubusercontent.com/rogplay/rogplay.github.io/refs/heads/main/assets/rogplay.svg" alt="Rogplay Logo" class="w-full h-full object-contain" />
+          </div>
+          <span
+            class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 tracking-tight">
+            ROGPLAY
+          </span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html#home" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Home</a>
+          <a href="index.html#addons" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Addons</a>
+          <a href="index.html#tutorial" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Tutorial</a>
+          <a href="index.html#api" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Developers</a>
+          <a href="https://telegram.me/rogplayaddons" target="_blank"
+            class="px-5 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all flex items-center gap-2 border border-white/5">
+            <i data-lucide="send" class="w-4 h-4"></i>
+            Join Community
+          </a>
         </div>
-    </nav>
 
-    <div class="pt-16 pb-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:grid lg:grid-cols-12 lg:gap-8">
-                <div class="hidden lg:block lg:col-span-3">
-                    <nav class="sticky top-20 divide-y divide-gray-700" id="category-nav">
-                        <!-- Category navigation will be populated here -->
-                    </nav>
-                </div>
-                <main class="lg:col-span-9">
-                    <div class="px-4 sm:px-6 lg:px-8">
-                        <h1 class="text-4xl font-bold mb-8 neon-text">API Documentation</h1>
+        <button id="menu-toggle"
+          class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2 bg-white/5 rounded-lg border border-white/10">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </nav>
+    </div>
+
+    <div id="mobile-menu"
+      class="hidden md:hidden absolute top-full left-0 w-full glass-nav border-t border-white/5 py-4 px-4 flex-col gap-4 shadow-2xl">
+      <a href="index.html#home"
+        class="mobile-link text-gray-300 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 flex items-center gap-3">
+        <i data-lucide="home" class="w-5 h-5 text-primary"></i> Home
+      </a>
+      <a href="index.html#addons"
+        class="mobile-link text-gray-300 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 flex items-center gap-3">
+        <i data-lucide="grid" class="w-5 h-5 text-secondary"></i> Addons
+      </a>
+      <a href="index.html#tutorial"
+        class="mobile-link text-gray-300 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 flex items-center gap-3">
+        <i data-lucide="play-circle" class="w-5 h-5 text-emerald-400"></i> Tutorial
+      </a>
+      <a href="index.html#api"
+        class="mobile-link text-gray-300 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 flex items-center gap-3">
+        <i data-lucide="code" class="w-5 h-5 text-amber-400"></i> Developers
+      </a>
+      <a href="https://telegram.me/rogplayaddons" target="_blank"
+        class="mt-2 px-4 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white text-center font-medium shadow-lg flex items-center justify-center gap-2">
+        <i data-lucide="send" class="w-5 h-5"></i>
+        Join Community Telegram
+      </a>
+    </div>
+  </header>
+
+  <main class="pt-32 pb-16 px-4 flex-grow relative z-10">
+    <div class="container mx-auto max-w-7xl glass-card rounded-3xl p-8 md:p-12">
+        <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+            <div class="hidden lg:block lg:col-span-3">
+                <nav class="sticky top-32 divide-y divide-white/5" id="category-nav">
+                    <!-- Category navigation will be populated here -->
+                </nav>
+            </div>
+            <div class="lg:col-span-9">
+                <div class="px-4 sm:px-6 lg:px-8">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-8 text-white tracking-tight">API Documentation</h1>
 
                         <section id="introduction" class="mb-12">
-                            <h2 class="text-2xl font-semibold mb-4">Introduction</h2>
+                            <h2 class="text-2xl font-bold mb-4 text-white">Introduction</h2>
                             <p class="mb-4">Welcome to the Rogplay API. This API allows you to create your own Fully
                                 edge working Addons, as well as cinema content and customize as you want.</p>
                             <p class="mb-4">This App made with React Native which works on JavaScript environment,
@@ -124,7 +200,7 @@
 
 
                         <section id="addons" class="mb-12">
-                            <h2 class="text-2xl font-semibold mb-4">Addons</h2>
+                            <h2 class="text-2xl font-bold mb-4 text-white">Addons</h2>
                             <p> Addons in the RogPlay app enhance user experience by allowing seamless integration of
                                 various streams. With this feature, users can add and enjoy a wide range of streaming
                                 sources, customizing their entertainment as they prefer.
@@ -132,12 +208,12 @@
                                 personalization, making RogPlay a versatile streaming platform.</p>
                             <br>
                             <div class="mb-8">
-                                <h3 class="text-xl font-semibold mb-2">Creating Addons</h3>
+                                <h3 class="text-xl font-bold mb-2 text-white">Creating Addons</h3>
                                 <p class="mb-2"><span class="method method-get">GET</span>
                                     https://pastebin.com/raw/xfwgakrL
                                 </p>
                                 <p class="mb-4">Sample of Supported Json Format</p>
-                                <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+                                <pre class="bg-black/30 border border-white/5 p-4 rounded-lg overflow-x-auto">
 <code>
 [
     {
@@ -172,13 +248,13 @@
                         </section>
 
                         <section id="streaming" class="mb-12">
-                            <h2 class="text-2xl font-semibold mb-4">Streaming / LiveTV</h2>
+                            <h2 class="text-2xl font-bold mb-4 text-white">Streaming / LiveTV</h2>
                             <p class="mb-2">Rogplay Support Native M3U and Json based structure for streaming contents
                             </p>
                             <div class="mb-8">
-                                <h3 class="text-xl font-semibold mb-2" style="color: #61affe;">M3u Format</h3>
+                                <h3 class="text-xl font-bold mb-2 text-white" style="color: #61affe;">M3u Format</h3>
                                 <p class="mb-4">Below Sample M3u Example </p>
-                                <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+                                <pre class="bg-black/30 border border-white/5 p-4 rounded-lg overflow-x-auto">
 <code>
 #EXTM3U
 #EXTINF:-1 tvg-id="1" tvg-logo="https://i.imgur.com/LMxTAzY.png" group-title="france",TF1 FHD
@@ -199,7 +275,7 @@ https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_exam
                             <p class="mb-2">Headers passed in url is case insensitive Origin, ORIGIN, orign treated same
                             </p>
                             <p class="mb-4">You can pass multiple headers by using <code> & </code></p>
-                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+                            <pre class="bg-black/30 border border-white/5 p-4 rounded-lg overflow-x-auto">
 <code>https://rogplay.live/index.m3u8?Referer=https://rogplay.live
 https://rogplay.live/index.m3u8|User-Agent=https://rogplay.live
 https://rogplay.live/index.m3u8?Referer=https://rogplay.live&Cookie=username=johndoe; expires=Thu, 18 Dec 2023</code>
@@ -214,7 +290,7 @@ https://rogplay.live/index.m3u8?Referer=https://rogplay.live&Cookie=username=joh
                             <br>
                             <code>1. WIDEVINE</code>
 
-                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+                            <pre class="bg-black/30 border border-white/5 p-4 rounded-lg overflow-x-auto">
 <code>#EXTINF:-1, Demo channel
 #KODIPROP:inputstream.adaptive.license_key=https://cwip-shaka-proxy.appspot.com/no_auth
 #KODIPROP:inputstream.adaptive.license_type=WIDEVINE
@@ -224,7 +300,7 @@ https://cdn.bitmovin.com/content/assets/art-of-motion_drm/m3u8s/11331.m3u8</code
 
                             <code>2. CLEARKEY</code>
 
-                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+                            <pre class="bg-black/30 border border-white/5 p-4 rounded-lg overflow-x-auto">
 <code>#EXTINF:-1, Demo channel
 #KODIPROP:inputstream.adaptive.license_key=https://example.to/licenseurl
 #KODIPROP:inputstream.adaptive.license_type=CLEARKEY
@@ -233,7 +309,7 @@ http://example.com/channel/02</code>
                             <br>
                             <p class="mb-4">Rogplay Supports differnt type of clearkeys format like base64 keys, hex
                                 keys as well as post request of license url</p>
-                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto mb-8">
+                            <pre class="bg-black/30 border border-white/5 p-4 rounded-lg overflow-x-auto mb-8">
 <code>1. Clearkey Hex
 #KODIPROP:inputstream.adaptive.license_key=edf1a715de9748638dd2fad75a419af2:2f5a3199b26e9b693ae881af7ff864cf
 
@@ -259,9 +335,9 @@ https://license.to/post
 
 
                             <div class="mb-8">
-                                <h3 class="text-xl font-semibold mb-2" style="color: #61affe;">Json Format</h3>
+                                <h3 class="text-xl font-bold mb-2 text-white" style="color: #61affe;">Json Format</h3>
                                 <p class="mb-4">Sample JSON Example </p>
-                                <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+                                <pre class="bg-black/30 border border-white/5 p-4 rounded-lg overflow-x-auto">
     <code>
     [
         {
@@ -297,7 +373,7 @@ https://license.to/post
 
                                 <code><b>headers [optional]</b></code>
                                 <p>Referers to headers of stream</p>
-                                <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+                                <pre class="bg-black/30 border border-white/5 p-4 rounded-lg overflow-x-auto">
     <code>
     headers: {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
@@ -315,10 +391,10 @@ https://license.to/post
 
 
 
- <!---CINEMA SECTION STARTS HERE-->                       
+                        <!---CINEMA SECTION STARTS HERE-->
 
                         <section id="cinema" class="mb-12">
-                            <h2 class="text-2xl font-semibold mb-4">Cinema</h2>
+                            <h2 class="text-2xl font-bold mb-4 text-white">Cinema</h2>
                             <p class="mb-4">Rogplay uses TheMovieDB (TMDB) Api to display content on cinema screen, you
                                 can check Documentation here <a style="color: #61affe;"
                                     href="https://developer.themoviedb.org/docs/getting-started">TMDB
@@ -327,7 +403,7 @@ https://license.to/post
                             <p class="mb-4">Note: Cinema addons required to use make cinema functionable</p>
                             <p class="mb-4">Cinema Addons Example 👇</p>
 
-                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto mb-4">
+                            <pre class="bg-black/30 border border-white/5 p-4 rounded-lg overflow-x-auto mb-4">
 <code>
 [
   {
@@ -347,7 +423,7 @@ https://license.to/post
                                 fetch movies and series informations.</p>
                             <p class="mb-2">Cinema Json API Example 👇</p>
 
-                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto mb-4"><code>
+                            <pre class="bg-black/30 border border-white/5 p-4 rounded-lg overflow-x-auto mb-4"><code>
 [ 
   {
       "tvurl": "https://example.com/api/series?id=${tmdb}&season=${season}&episode=${episode}",
@@ -369,7 +445,7 @@ https://license.to/post
                             <p class="mb-2">This is how tvurl
                                 https://example.com/api/series?id=${tmdb}&season=${season}&episode=${episode} response
                                 look like </p>
-                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto mb-4"><code>
+                            <pre class="bg-black/30 border border-white/5 p-4 rounded-lg overflow-x-auto mb-4"><code>
 [
     {
       "title": "Hindi",
@@ -403,7 +479,7 @@ https://license.to/post
                             <p class="mb-2">This object points variable which indicate id of content e.g. 1, 2</p>
                             <code>6. headers</code>
                             <p class="mb-2">Referers to header of stream</p>
-                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+                            <pre class="bg-black/30 border border-white/5 p-4 rounded-lg overflow-x-auto">
                             <code>
 headers: {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
@@ -417,15 +493,16 @@ headers: {
 
 
 
-<!--- Movie section starts here-->
+                        <!--- Movie section starts here-->
 
                         <section id="movie" class="mb-12">
-                            <h2 class="text-2xl font-semibold mb-4">Movie</h2>
-                            <p class="mb-4">Movie are seamless feature of Rogplay, allow you create and play anything, unlike other type, they give full fledge access to streaming</p>
+                            <h2 class="text-2xl font-bold mb-4 text-white">Movie</h2>
+                            <p class="mb-4">Movie are seamless feature of Rogplay, allow you create and play anything,
+                                unlike other type, they give full fledge access to streaming</p>
                             <p class="mb-4">Note: Cinema addons required to use make cinema functionable</p>
                             <p class="mb-4">Movie Addons Example 👇</p>
 
-                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto mb-4">
+                            <pre class="bg-black/30 border border-white/5 p-4 rounded-lg overflow-x-auto mb-4">
 <code>
 [
     {
@@ -441,18 +518,21 @@ headers: {
                             <p class="mb-6">Title Logo Version and Auhtor will display in addons page.</p>
 
                             <p class="mb-2"><span class="method method-post">Movie Addons Url</span>
-                            <p class="mb-2">This is entrypoint of your api, all the parameters like search, page pass here</p>
+                            <p class="mb-2">This is entrypoint of your api, all the parameters like search, page pass
+                                here</p>
                             <p class="mb-2"><b>Searching a movie</b></p>
                             <p class="mb-2">https://hindimovie.vercel.app/?search=your_search</p>
                             <br>
-                            <p class="mb-2">here param <b>search</b> is a search api, it uses this param in app to fetch content from api and displaying in app, your search result should look like this</p>
+                            <p class="mb-2">here param <b>search</b> is a search api, it uses this param in app to fetch
+                                content from api and displaying in app, your search result should look like this</p>
                             <p class="mb-2"><b>pagination of movie list</b></p>
                             <p class="mb-2">https://hindimovie.vercel.app/?page=pagenum</p>
-                            <p class="mb-2">here param <b>page</b> is used to retrive response when fetching larger contents</p>
+                            <p class="mb-2">here param <b>page</b> is used to retrive response when fetching larger
+                                contents</p>
                             <br>
                             <p class="mb-2"><b>Response of search and pagination url</b></p>
 
-                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto mb-4"><code>
+                            <pre class="bg-black/30 border border-white/5 p-4 rounded-lg overflow-x-auto mb-4"><code>
 [
   {
     "url": "https://hindimovie.vercel.app/?url=https://111.90.159.132/action/titanic-2018/",
@@ -475,9 +555,10 @@ headers: {
 
 
                             <code>1. url</code>
-                            <p class="mb-2">This url is a entrypoint of the stream url json, your stream json will appear on fetching it</p>
-                            <p class="mb-2">Your url response should look like this </p>                            
-                            <pre class="bg-muted p-4 rounded-lg overflow-x-auto mb-4"><code>
+                            <p class="mb-2">This url is a entrypoint of the stream url json, your stream json will
+                                appear on fetching it</p>
+                            <p class="mb-2">Your url response should look like this </p>
+                            <pre class="bg-black/30 border border-white/5 p-4 rounded-lg overflow-x-auto mb-4"><code>
 [
     {
       "title": "Hindi",
@@ -506,116 +587,135 @@ headers: {
                             <code>2. title</code>
                             <p class="mb-2">Referers to title of stream </p>
                             <code>3. file</code>
-                            <p class="mb-2">Referers to url of stream </p>                           
+                            <p class="mb-2">Referers to url of stream </p>
                             <code>4. headers {optional}</code>
-                            <p class="mb-2">Referers to headers </p>   
+                            <p class="mb-2">Referers to headers </p>
 
 
                         </section>
-                        
+
 
 
                     </div>
-                </main>
+                
             </div>
         </div>
     </div>
+  </main>
 
-    <footer class="bg-muted py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center">
-                <p class="text-sm text-gray-400">&copy; 2025 Rogplay. All rights reserved.</p>
-                <nav class="flex space-x-4">
-                    <a href="https://rogplay.github.io/privacy-policy.html"
-                        class="text-sm text-gray-400 hover:text-white">Privacy Policy</a>
-                    <a href="https://rogplay.github.io/terms-of-service.html"
-                        class="text-sm text-gray-400 hover:text-white">Terms of Service</a>
-                </nav>
-            </div>
+  <footer class="border-t border-white/5 bg-black/40 backdrop-blur-xl py-12 px-4 mt-auto">
+    <div class="container mx-auto max-w-7xl">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex items-center gap-3">
+          <div class="h-8 w-8 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
+            <i data-lucide="play" class="w-4 h-4 text-white fill-white"></i>
+          </div>
+          <span class="text-xl font-bold text-white tracking-tight">ROGPLAY</span>
         </div>
-    </footer>
 
-    <script>
-        const cursorGlow = document.getElementById('cursor-glow');
-        let isMoving = false;
-        let fadeOutTimeout;
+        <div class="flex gap-6 text-sm text-gray-400">
+          <a href="privacypolicy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="addonspolicy.html" class="hover:text-white transition-colors">Addons Policy</a>
+          <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
+          <a href="about.html" class="hover:text-white transition-colors">About Us</a>
+        </div>
 
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX - 100;
-            const y = e.clientY - 100;
+        <div class="text-sm text-gray-500">
+          © <span id="year"></span> Rogplay. All rights reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
 
-            cursorGlow.style.left = `${x}px`;
-            cursorGlow.style.top = `${y}px`;
+  <script>
+    lucide.createIcons();
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-            if (!isMoving) {
-                isMoving = true;
-                cursorGlow.style.opacity = '1';
-            }
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
 
-            clearTimeout(fadeOutTimeout);
-            fadeOutTimeout = setTimeout(() => {
-                cursorGlow.style.opacity = '0';
-                isMoving = false;
-            }, 300);
-        });
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.toggle('flex');
+    });
 
-        document.addEventListener('mouseleave', () => {
-            cursorGlow.style.opacity = '0';
-        });
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+      });
+    });
 
-        // Populate category navigation
-        const categories = [
-            { id: 'introduction', name: 'Introduction' },
-            { id: 'addons', name: 'Addons' },
-            { id: 'streaming', name: 'Streaming' },
-            { id: 'cinema', name: 'Cinema' },
-            { id: 'movie', name: 'Movie' }
-        ];
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('shadow-2xl');
+      } else {
+        header.classList.remove('shadow-2xl');
+      }
+    });
 
-        const categoryNav = document.getElementById('category-nav');
+    // Populate category navigation
+    const categories = [
+        { id: 'introduction', name: 'Introduction' },
+        { id: 'addons', name: 'Addons' },
+        { id: 'streaming', name: 'Streaming' },
+        { id: 'cinema', name: 'Cinema' },
+        { id: 'movie', name: 'Movie' }
+    ];
+
+    const categoryNav = document.getElementById('category-nav');
+    if(categoryNav) {
         categories.forEach(category => {
             const link = document.createElement('a');
             link.href = `#${category.id}`;
-            link.className = 'block py-2 text-base font-medium text-gray-300 hover:text-primary transition-colors';
+            link.className = 'block py-3 text-base font-medium text-gray-400 hover:text-white transition-colors';
             link.textContent = category.name;
             categoryNav.appendChild(link);
         });
+    }
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if(target) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                target.scrollIntoView({
                     behavior: 'smooth'
                 });
-            });
+            }
         });
+    });
 
-        // Highlight active category in navigation
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.5
-        };
+    // Highlight active category in navigation
+    const observerOptions = {
+        root: null,
+        rootMargin: '-100px 0px 0px 0px',
+        threshold: 0.1
+    };
 
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const activeLink = document.querySelector(`#category-nav a[href="#${entry.target.id}"]`);
-                    document.querySelectorAll('#category-nav a').forEach(link => {
-                        link.classList.remove('text-primary');
-                    });
-                    if (activeLink) {
-                        activeLink.classList.add('text-primary');
-                    }
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const activeLink = document.querySelector(`#category-nav a[href="#${entry.target.id}"]`);
+                document.querySelectorAll('#category-nav a').forEach(link => {
+                    link.classList.remove('text-white', 'text-primary');
+                    link.classList.add('text-gray-400');
+                });
+                if (activeLink) {
+                    activeLink.classList.remove('text-gray-400');
+                    activeLink.classList.add('text-white', 'text-primary');
                 }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('section[id]').forEach((section) => {
-            observer.observe(section);
+            }
         });
-    </script>
+    }, observerOptions);
+
+    document.querySelectorAll('section[id]').forEach((section) => {
+        observer.observe(section);
+    });
+  </script>
 </body>
 
 </html>

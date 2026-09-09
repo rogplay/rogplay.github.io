@@ -1,87 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Rogplay</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: 'hsl(280, 100%, 50%)',
-                        secondary: 'hsl(160, 100%, 50%)',
-                        background: 'hsl(230, 30%, 10%)',
-                        muted: 'hsl(240, 20%, 20%)',
-                    }
-                }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Rogplay</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            background: '#030712',
+            surface: '#111827',
+            primary: '#0ea5e9',
+            secondary: '#8b5cf6'
+          },
+          animation: {
+            'blob': 'blob 7s infinite',
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
             }
+          }
         }
-    </script>
-    <style>
-        .neon-glow { box-shadow: 0 0 10px rgba(168, 85, 247, 0.5), 0 0 20px rgba(168, 85, 247, 0.3), 0 0 30px rgba(168, 85, 247, 0.1); }
-        .neon-text { text-shadow: 0 0 5px rgba(168, 85, 247, 0.5), 0 0 10px rgba(168, 85, 247, 0.3), 0 0 15px rgba(168, 85, 247, 0.1); }
-        .neon-border { box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2), 0 0 0 4px rgba(168, 85, 247, 0.2); }
-        .cursor-glow {
-            position: fixed;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(168, 85, 247, 0) 70%);
-        }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #030712;
+      color: #f3f4f6;
+    }
+    .glass-card {
+      background: rgba(17, 24, 39, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(14, 165, 233, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px -10px rgba(14, 165, 233, 0.2);
+    }
+    .glass-nav {
+      background: rgba(3, 7, 18, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #030712;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #374151;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #4b5563;
+    }
+  </style>
 </head>
-<body class="bg-background text-white">
-    <div id="cursor-glow" class="cursor-glow"></div>
 
-    <nav class="fixed w-full z-50 bg-background/80 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <a href="/" class="flex items-center space-x-2">
-                        <div class="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg"></div>
-                        <span class="text-xl font-bold">Rogplay</span>
-                    </a>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="/" class="text-gray-300 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                        <a href="/about" class="text-gray-300 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">About</a>
-                        <a href="/api-docs" class="text-gray-300 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">API Docs</a>
-                    </div>
-                </div>
-            </div>
+<body class="min-h-screen flex flex-col relative overflow-x-hidden antialiased">
+  <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+    <div
+      class="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob">
+    </div>
+    <div
+      class="absolute top-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-2000">
+    </div>
+    <div
+      class="absolute -bottom-32 left-1/2 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-4000">
+    </div>
+  </div>
+
+  <header class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+    <div class="container mx-auto px-4 lg:px-8 py-4">
+      <nav class="flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="relative h-10 w-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+            <img src="https://raw.githubusercontent.com/rogplay/rogplay.github.io/refs/heads/main/assets/rogplay.svg" alt="Rogplay Logo" class="w-full h-full object-contain" />
+          </div>
+          <span
+            class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 tracking-tight">
+            ROGPLAY
+          </span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html#home" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Home</a>
+          <a href="index.html#addons" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Addons</a>
+          <a href="index.html#tutorial" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Tutorial</a>
+          <a href="index.html#api" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Developers</a>
+          <a href="https://telegram.me/rogplayaddons" target="_blank"
+            class="px-5 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all flex items-center gap-2 border border-white/5">
+            <i data-lucide="send" class="w-4 h-4"></i>
+            Join Community
+          </a>
         </div>
-    </nav>
 
-    <main class="pt-24 pb-16">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-4xl font-bold mb-8 neon-text">Privacy Policy</h1>
-            
-            <section class="mb-12">
-                <h2 class="text-2xl font-semibold mb-4">1. Introduction</h2>
-                <p class="mb-4">Welcome to Rogplay's Privacy Policy. Your privacy is critically important to us. This Privacy Policy document contains types of information that is collected and recorded by Rogplay and how we use it.</p>
+        <button id="menu-toggle"
+          class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2 bg-white/5 rounded-lg border border-white/10">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </nav>
+    </div>
+
+    <div id="mobile-menu"
+      class="hidden md:hidden absolute top-full left-0 w-full glass-nav border-t border-white/5 py-4 px-4 flex-col gap-4 shadow-2xl">
+      <a href="index.html#home"
+        class="mobile-link text-gray-300 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 flex items-center gap-3">
+        <i data-lucide="home" class="w-5 h-5 text-primary"></i> Home
+      </a>
+      <a href="index.html#addons"
+        class="mobile-link text-gray-300 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 flex items-center gap-3">
+        <i data-lucide="grid" class="w-5 h-5 text-secondary"></i> Addons
+      </a>
+      <a href="index.html#tutorial"
+        class="mobile-link text-gray-300 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 flex items-center gap-3">
+        <i data-lucide="play-circle" class="w-5 h-5 text-emerald-400"></i> Tutorial
+      </a>
+      <a href="index.html#api"
+        class="mobile-link text-gray-300 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 flex items-center gap-3">
+        <i data-lucide="code" class="w-5 h-5 text-amber-400"></i> Developers
+      </a>
+      <a href="https://telegram.me/rogplayaddons" target="_blank"
+        class="mt-2 px-4 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white text-center font-medium shadow-lg flex items-center justify-center gap-2">
+        <i data-lucide="send" class="w-5 h-5"></i>
+        Join Community Telegram
+      </a>
+    </div>
+  </header>
+
+  <main class="pt-32 pb-16 px-4 flex-grow relative z-10">
+    <div class="container mx-auto max-w-4xl glass-card rounded-3xl p-8 md:p-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-10 text-white tracking-tight">Privacy Policy</h1>
+
+            <section class="mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-white">1. Introduction</h2>
+                <p class="text-gray-400 leading-relaxed mb-4">Welcome to Rogplay's Privacy Policy. Your privacy is critically important to us. This
+                    Privacy Policy document contains types of information that is collected and recorded by Rogplay and
+                    how we use it.</p>
             </section>
 
-            <section class="mb-12">
-                <h2 class="text-2xl font-semibold mb-4">2. Information We Collect</h2>
-                <p class="mb-4">We collect several different types of information for various purposes to provide and improve our Service to you:</p>
-                <ul class="list-disc pl-6 mb-4">
-                    <li>Personal Data: While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you.</li>
+            <section class="mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-white">2. Information We Collect</h2>
+                <p class="text-gray-400 leading-relaxed mb-4">We collect several different types of information for various purposes to provide and
+                    improve our Service to you:</p>
+                <ul class="list-disc pl-6 text-gray-400 space-y-2 leading-relaxed">
+                    <li>Personal Data: While using our Service, we may ask you to provide us with certain personally
+                        identifiable information that can be used to contact or identify you.</li>
                     <li>Usage Data: We may also collect information on how the Service is accessed and used.</li>
-                    <li>Tracking & Cookies Data: We use cookies and similar tracking technologies to track the activity on our Service and hold certain information.</li>
+                    <li>Tracking & Cookies Data: We use cookies and similar tracking technologies to track the activity
+                        on our Service and hold certain information.</li>
                 </ul>
             </section>
 
-            <section class="mb-12">
-                <h2 class="text-2xl font-semibold mb-4">3. How We Use Your Information</h2>
-                <p class="mb-4">Rogplay uses the collected data for various purposes:</p>
-                <ul class="list-disc pl-6 mb-4">
+            <section class="mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-white">3. How We Use Your Information</h2>
+                <p class="text-gray-400 leading-relaxed mb-4">Rogplay uses the collected data for various purposes:</p>
+                <ul class="list-disc pl-6 text-gray-400 space-y-2 leading-relaxed">
                     <li>To provide and maintain our Service</li>
                     <li>To notify you about changes to our Service</li>
                     <li>To allow you to participate in interactive features of our Service when you choose to do so</li>
@@ -92,66 +187,84 @@
                 </ul>
             </section>
 
-            <section class="mb-12">
-                <h2 class="text-2xl font-semibold mb-4">4. Data Security</h2>
-                <p class="mb-4">The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.</p>
+            <section class="mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-white">4. Data Security</h2>
+                <p class="text-gray-400 leading-relaxed">The security of your data is important to us, but remember that no method of
+                    transmission over the Internet, or method of electronic storage is 100% secure. While we strive to
+                    use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute
+                    security.</p>
             </section>
 
-            <section class="mb-12">
-                <h2 class="text-2xl font-semibold mb-4">5. Changes to This Privacy Policy</h2>
-                <p class="mb-4">We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+            <section class="mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-white">5. Changes to This Privacy Policy</h2>
+                <p class="text-gray-400 leading-relaxed">We may update our Privacy Policy from time to time. We will notify you of any changes by
+                    posting the new Privacy Policy on this page. You are advised to review this Privacy Policy
+                    periodically for any changes.</p>
             </section>
 
             <section>
-                <h2 class="text-2xl font-semibold mb-4">6. Contact Us</h2>
-                <p class="mb-4">If you have any questions about this Privacy Policy, please contact us:</p>
-                <ul class="list-disc pl-6">
+                <h2 class="text-2xl font-bold mb-4 text-white">6. Contact Us</h2>
+                <p class="text-gray-400 leading-relaxed mb-4">If you have any questions about this Privacy Policy, please contact us:</p>
+                <ul class="list-disc pl-6 text-gray-400 space-y-2 leading-relaxed">
                     <li>By email: kunwarxshashank@gmail.com</li>
-                    <li>By visiting this page on our website: https://rogplay.github.io/contact.html</li>
+                    <li>By visiting this page on our website: <a href="contact.html" class="text-primary hover:underline">Contact Us</a></li>
                 </ul>
             </section>
+    </div>
+  </main>
+
+  <footer class="border-t border-white/5 bg-black/40 backdrop-blur-xl py-12 px-4 mt-auto">
+    <div class="container mx-auto max-w-7xl">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex items-center gap-3">
+          <div class="h-8 w-8 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
+            <i data-lucide="play" class="w-4 h-4 text-white fill-white"></i>
+          </div>
+          <span class="text-xl font-bold text-white tracking-tight">ROGPLAY</span>
         </div>
-    </main>
 
-    <footer class="bg-muted py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center">
-                <p class="text-sm text-gray-400">&copy; 2025 Rogplay. All rights reserved.</p>
-                <nav class="flex space-x-4">
-                    <a href="/privacy-policy" class="text-sm text-gray-400 hover:text-white">Privacy Policy</a>
-                    <a href="/terms-of-service" class="text-sm text-gray-400 hover:text-white">Terms of Service</a>
-                </nav>
-            </div>
+        <div class="flex gap-6 text-sm text-gray-400">
+          <a href="privacypolicy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
+          <a href="about.html" class="hover:text-white transition-colors">About Us</a>
         </div>
-    </footer>
 
-    <script>
-        const cursorGlow = document.getElementById('cursor-glow');
-        let isMoving = false;
-        let fadeOutTimeout;
+        <div class="text-sm text-gray-500">
+          © <span id="year"></span> Rogplay. All rights reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
 
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX - 100;
-            const y = e.clientY - 100;
-            
-            cursorGlow.style.left = `${x}px`;
-            cursorGlow.style.top = `${y}px`;
-            
-            if (!isMoving) {
-                isMoving = true;
-                cursorGlow.style.opacity = '1';
-            }
-            
-            clearTimeout(fadeOutTimeout);
-            fadeOutTimeout = setTimeout(() => {
-                cursorGlow.style.opacity = '0';
-                isMoving = false;
-            }, 300);
-        });
+  <script>
+    lucide.createIcons();
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-        document.addEventListener('mouseleave', () => {
-            cursorGlow.style.opacity = '0';
-        });
-    </script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.toggle('flex');
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+      });
+    });
+
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('shadow-2xl');
+      } else {
+        header.classList.remove('shadow-2xl');
+      }
+    });
+  </script>
 </body>
+
 </html>
